@@ -1088,50 +1088,96 @@
         background: #fff;
         border-radius: 12px;
         box-shadow: 0 4px 18px rgba(0,0,0,0.07);
-        padding: 28px 28px 24px;
         display: flex;
         flex-direction: column;
-        transition: transform 0.3s, box-shadow 0.3s;
         border-top: 4px solid var(--orange-primary);
+        overflow: hidden;
+        transition: transform 0.3s, box-shadow 0.3s;
+        cursor: pointer;
       }
       .news-card:hover {
         transform: translateY(-4px);
-        box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        box-shadow: 0 8px 30px rgba(0,0,0,0.14);
+      }
+      .news-card-header {
+        padding: 24px 24px 20px;
       }
       .news-date {
-        font-size: 13px;
+        font-size: 12px;
         font-weight: 700;
         color: var(--orange-primary);
         text-transform: uppercase;
-        letter-spacing: 0.5px;
+        letter-spacing: 0.6px;
         margin-bottom: 10px;
       }
       .news-card h3 {
-        font-size: 16px;
+        font-size: 15px;
         font-weight: 700;
         color: var(--deep-blue);
-        margin-bottom: 14px;
-        line-height: 1.4;
+        line-height: 1.45;
+        margin: 0;
       }
-      .news-card p {
-        font-size: 14px;
-        color: #555;
-        line-height: 1.65;
-        flex: 1;
-      }
-      .news-link {
-        display: inline-block;
-        margin-top: 16px;
+      .news-card-toggle {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 0 24px 18px;
         font-size: 13px;
+        font-weight: 600;
+        color: var(--orange-primary);
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+        transition: color 0.2s;
+      }
+      .news-card-toggle:hover { color: var(--orange-dark); }
+      .news-card-toggle .toggle-icon {
+        display: inline-block;
+        transition: transform 0.3s;
+        font-style: normal;
+      }
+      .news-card-toggle.open .toggle-icon { transform: rotate(180deg); }
+      .news-card-body {
+        display: none;
+        padding: 0 24px 24px;
+        border-top: 1px solid var(--light-gray);
+      }
+      .news-card-body.open {
+        display: block;
+      }
+      .news-card-body p {
+        font-size: 14px;
+        color: #444;
+        line-height: 1.75;
+        margin-bottom: 12px;
+      }
+      .news-card-body p:last-child { margin-bottom: 0; }
+      .news-card-body ul {
+        margin: 10px 0 14px 18px;
+        font-size: 14px;
+        color: #444;
+        line-height: 1.75;
+      }
+      .news-card-body a {
         color: var(--orange-primary);
         font-weight: 600;
         text-decoration: none;
-        transition: color 0.2s;
       }
-      .news-link:hover { color: var(--orange-dark); text-decoration: underline; }
+      .news-card-body a:hover { text-decoration: underline; color: var(--orange-dark); }
+      .news-card-body .news-quote {
+        border-left: 3px solid var(--orange-primary);
+        padding: 10px 16px;
+        margin: 14px 0;
+        font-style: italic;
+        color: #555;
+        background: #fff8f4;
+        border-radius: 0 6px 6px 0;
+      }
       @media (max-width: 768px) {
         .news-grid { grid-template-columns: 1fr; }
       }
+
     </style>
   </head>
   <body>
@@ -1389,30 +1435,101 @@
         <h2 class="section-title reveal">Новости</h2>
         <div class="news-grid">
 
-          <div class="news-card reveal">
-            <div class="news-date">01 июня 2025</div>
-            <h3>Решение о строительстве комплексного предприятия по разведению и выращиванию форели мощностью 6400 тонн в год</h3>
-            <p>ООО «Технопром» планирует строительство и запуск промышленного предприятия по разведению и выращиванию форели с полным циклом производства объёмом 6 400 тонн рыбы в год. Проект разработан при поддержке РАН и инновационного центра «Сколково».</p>
+          <!-- News 1 -->
+          <div class="news-card reveal" onclick="toggleNews(this)">
+            <div class="news-card-header">
+              <div class="news-date">01 июня 2025</div>
+              <h3>Решение о строительстве комплексного предприятия по разведению и выращиванию форели мощностью 6 400 тонн готовой продукции в год</h3>
+            </div>
+            <button class="news-card-toggle" onclick="event.stopPropagation(); toggleNews(this.closest('.news-card'))">
+              Читать полностью <i class="toggle-icon">&#9660;</i>
+            </button>
+            <div class="news-card-body">
+              <p>В связи с постоянно растущим спросом в регионе и за его пределами на свежую рыбу и рыбопродукты ООО «Технопром» планирует строительство и запуск промышленного предприятия по разведению и выращиванию форели, в том числе по её переработке в готовый продукт для потребителей, с сопутствующей инфраструктурой, с целью достижения полного цикла производства общим объёмом 6 400 тонн рыбы в год.</p>
+              <p>Выращивание форели будет осуществляться по современной технологии «установка замкнутого водоснабжения» (УЗВ) — в специальных бассейнах, размещённых в закрытых отапливаемых помещениях, что позволит существенно ускорить процесс роста рыбы и сделать его круглогодичным. Данная технология имеет огромные преимущества перед садковым типом: контроль над процессом, независимость от климата, снижение рисков заболеваемости, экологичность и быстрый рост.</p>
+              <p>Проектом предусмотрено строительство следующих подразделений:</p>
+              <ul>
+                <li>цех по содержанию маточного стада рыбы (получение икры);</li>
+                <li>инкубатор (выращивание мальков из икры);</li>
+                <li>цех по выращиванию молоди форели до товарного размера;</li>
+                <li>комбикормовый завод по производству кормов для рыбы и КРС;</li>
+                <li>мясоперерабатывающий комплекс, холодильник, складские помещения;</li>
+                <li>собственная аналитическая лаборатория.</li>
+              </ul>
+              <p>Проект является уникальным и высокотехнологичным, не имеет аналогов ни в России, ни за её пределами. Производственные мощности Романовского рыбного комбината обеспечат выпуск 6 400 тонн готовой продукции с планируемой среднегодовой выручкой <strong>4,2 млрд рублей</strong>.</p>
+              <p>Помимо этого, дополнительную выручку обеспечит комбикормовый завод мощностью 72 000 тонн в год с планируемой выручкой от продажи на открытом рынке порядка <strong>1,5 млрд рублей</strong>.</p>
+              <p>Данный проект был разработан при поддержке научных сотрудников Российской академии наук (РАН) совместно с командой инновационного центра «Сколково». Рыбокомбинат планируется построить на базе ООО «Романовские угодья» в Топкинском муниципальном округе Кемеровской области на земельном участке площадью 23,2 га.</p>
+              <p>Основными покупателями рыбной продукции будут крупные торговые предприятия Кемеровской и Новосибирской областей, а также федеральные сети: «Ашан», Metro, «О'КЕЙ», X5 Retail Group, «Магнит», «ВкусВилл». По мере развития рынок сбыта будет расширен на Китай и страны СНГ.</p>
+            </div>
           </div>
 
-          <div class="news-card reveal">
-            <div class="news-date">25 декабря 2025</div>
-            <h3>О подписании соглашения с Правительством Кемеровской Области</h3>
-            <p>Проект по «Организации промышленного производства по выращиванию и дальнейшей переработке форели в Кемерово» одобрен правительством. 23 декабря 2025 г. заключено Соглашение № 1231-16 об инвестиционной деятельности между Кемеровской областью — Кузбассом и ООО «Технопром».</p>
-            <a class="news-link" href="https://bulleten-kuzbass.ru/bulletin/330125" target="_blank">Официальное распоряжение →</a>
+          <!-- News 2 -->
+          <div class="news-card reveal" onclick="toggleNews(this)">
+            <div class="news-card-header">
+              <div class="news-date">25 декабря 2025</div>
+              <h3>О подписании соглашения с Правительством Кемеровской области</h3>
+            </div>
+            <button class="news-card-toggle" onclick="event.stopPropagation(); toggleNews(this.closest('.news-card'))">
+              Читать полностью <i class="toggle-icon">&#9660;</i>
+            </button>
+            <div class="news-card-body">
+              <p>Проект по «Организации промышленного производства по выращиванию и дальнейшей переработке форели в Кемерово» одобрен правительством.</p>
+              <p>23 декабря 2025 г. заключено Соглашение № 1231-16 об инвестиционной деятельности между Кемеровской областью — Кузбассом и ООО «Технопром», направленное на реализацию инвестиционного проекта «Организация промышленного производства по выращиванию и дальнейшей переработке форели в Кемеровской области».</p>
+              <p>22 декабря 2025 г. вышло официальное распоряжение о включении проекта в перечень приоритетных: <a href="https://bulleten-kuzbass.ru/bulletin/330125" target="_blank">bulleten-kuzbass.ru/bulletin/330125</a></p>
+            </div>
           </div>
 
-          <div class="news-card reveal">
-            <div class="news-date">01 апреля 2026</div>
-            <h3>ООО «Технопром» объявляет финансовые результаты за 2025 год</h3>
-            <p>Годовая выручка составила 2,2 млрд рублей — прирост на 29% к 2024 г. Чистая прибыль выросла в 10 раз и составила 192 млн рублей. Капитал компании достиг 250 млн рублей (+309% к 2024 г.). EBITDA увеличилась на 955% и составила 256 млн рублей. Прогнозная выручка по итогам 2026 года — 4,2 млрд рублей.</p>
+          <!-- News 3 -->
+          <div class="news-card reveal" onclick="toggleNews(this)">
+            <div class="news-card-header">
+              <div class="news-date">01 апреля 2026</div>
+              <h3>ООО «Технопром» объявляет финансовые результаты за 2025 год согласно официальной аудированной отчётности</h3>
+            </div>
+            <button class="news-card-toggle" onclick="event.stopPropagation(); toggleNews(this.closest('.news-card'))">
+              Читать полностью <i class="toggle-icon">&#9660;</i>
+            </button>
+            <div class="news-card-body">
+              <ul>
+                <li>Годовая выручка по итогам 2025 года составила <strong>2,2 млрд рублей</strong> — прирост на 29% к 2024 г.</li>
+                <li>Чистая прибыль выросла в 10 раз и составила <strong>192 млн рублей</strong>.</li>
+                <li>Капитал компании составил <strong>250 млн рублей</strong> — прирост на 309% к 2024 г.</li>
+                <li>EBITDA увеличилась на 955% и составила <strong>256 млн рублей</strong>.</li>
+                <li>Прогнозная выручка по итогам 2026 года составит <strong>4,2 млрд рублей</strong>.</li>
+              </ul>
+            </div>
           </div>
 
-          <div class="news-card reveal">
-            <div class="news-date">28 мая 2026</div>
-            <h3>ООО «Технопром» объявляет о размещении дебютного выпуска ЦФА</h3>
-            <p>Старт размещения дебютного выпуска долговых ЦФА на платформе «Токеон» (тикер: THPR1). Объём выпуска: 30 млн руб., ставка 23% годовых, срок обращения ~6 месяцев. Приём заявок: с 28.05.2026 по 08.06.2026.</p>
-            <a class="news-link" href="https://tokeon.ru/vypuski/THPR1?utm_source=agent&utm_medium=THPR1&utm_campaign=referral&utm_term=6aca47c6-fc49-4903-8225-2a2a03fc5450" target="_blank">Принять участие на платформе Токеон →</a>
+          <!-- News 4 -->
+          <div class="news-card reveal" onclick="toggleNews(this)">
+            <div class="news-card-header">
+              <!-- УТОЧНИТЬ ДАТУ -->
+              <div class="news-date">28 мая 2026</div>
+              <!-- /УТОЧНИТЬ ДАТУ -->
+              <h3>ООО «Технопром» объявляет о размещении дебютного выпуска ЦФА</h3>
+            </div>
+            <button class="news-card-toggle" onclick="event.stopPropagation(); toggleNews(this.closest('.news-card'))">
+              Читать полностью <i class="toggle-icon">&#9660;</i>
+            </button>
+            <div class="news-card-body">
+              <p>ООО «Технопром» — оптовый поставщик для горнодобывающей отрасли — объявляет о старте размещения дебютного выпуска долговых цифровых финансовых активов (ЦФА) на платформе ООО «Токены» («Токеон»).</p>
+              <p>Выпуск ЦФА станет первым публичным размещением финансового инструмента компании и ещё одним шагом в развитии работы с рынком капитала. Привлечённые средства планируется направить на строительство собственного логистического центра.</p>
+              <p><strong>Ключевые параметры:</strong></p>
+              <ul>
+                <li>Объём выпуска: <strong>30 млн рублей</strong> (30 000 ЦФА).</li>
+                <li>Номинал и цена: <strong>1 000 ₽</strong> за 1 ЦФА.</li>
+                <li>Ставка: <strong>23% годовых</strong>, выплата ежемесячная.</li>
+                <li>Погашение: <strong>07 декабря 2026 года</strong> (срок обращения ~6 месяцев).</li>
+                <li>Обеспечение: не предусмотрено.</li>
+                <li>Тикер на платформе «Токеон»: <strong>THPR1</strong>.</li>
+              </ul>
+              <p><!-- УТОЧНИТЬ ДАТУ --><strong>Сроки приёма заявок:</strong> с 28.05.2026 в 10:00 по 08.06.2026 в 14:00 (МСК).<!-- /УТОЧНИТЬ ДАТУ --> Заявки удовлетворяются в порядке поступления. Размещение может быть завершено досрочно при достижении максимального объёма.</p>
+              <p>Принять участие в размещении можно через платформу «Токеон»: <!-- УТОЧНИТЬ ССЫЛКУ --><a href="https://tokeon.ru/vypuski/THPR1?utm_source=agent&utm_medium=THPR1&utm_campaign=referral&utm_term=6aca47c6-fc49-4903-8225-2a2a03fc5450" target="_blank">tokeon.ru/vypuski/THPR1</a><!-- /УТОЧНИТЬ ССЫЛКУ --></p>
+              <div class="news-quote">
+                «Выпуск ЦФА — ещё один шаг в диверсификации источников финансирования компании. Мы внимательно изучаем возможности рынка капитала и рассматриваем ЦФА как гибкий инструмент для привлечения ликвидности под наши инвестиционные проекты. Для нас это также первый опыт публичного размещения финансового инструмента, который открывает дополнительные возможности для дальнейшего развития взаимодействия с инвестиционным сообществом.»
+                <br><strong>— Юлия Агаларова, коммерческий директор ООО «Технопром»</strong>
+              </div>
+              <p>Контакты: <strong>8 995 294-44-10</strong>, <a href="mailto:yulya.agalarova@bk.ru">yulya.agalarova@bk.ru</a></p>
+            </div>
           </div>
 
         </div>
@@ -1935,5 +2052,16 @@
         passive: true,
       });
     </script>
-  </body>
+  
+    <script>
+      function toggleNews(card) {
+        var body = card.querySelector('.news-card-body');
+        var btn = card.querySelector('.news-card-toggle');
+        var isOpen = body.classList.contains('open');
+        body.classList.toggle('open', !isOpen);
+        btn.classList.toggle('open', !isOpen);
+        btn.childNodes[0].textContent = isOpen ? 'Читать полностью ' : 'Свернуть ';
+      }
+    </script>
+</body>
 </html>
