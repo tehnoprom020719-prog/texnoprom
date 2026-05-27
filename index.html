@@ -1,0 +1,1939 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      ООО "ТЕХНОПРОМ" - Поставщик мелющих шаров и МВСП по всей России
+    </title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="icon" type="image/png" href="images/favicon.png" />
+    <style>
+      :root {
+        --deep-blue: #1a365d;
+        --steel-blue: #2d4a7c;
+        --industrial-blue: #3a6bc7;
+        --steel-gray: #6b7280;
+        --light-gray: #e5e7eb;
+        --white: #ffffff;
+        --accent: #e63946;
+        --orange-primary: #ff6b00;
+        --orange-secondary: #ff8c42;
+        --orange-light: #ffd8b6;
+        --orange-dark: #cc5500;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      body {
+        line-height: 1.6;
+        color: #333;
+        background-color: #f9fafb;
+        overflow-x: hidden;
+        -webkit-text-size-adjust: 100%;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+      @keyframes slideInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      @keyframes slideInRight {
+        from {
+          opacity: 0;
+          transform: translateX(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+      @keyframes ripple {
+        0% {
+          transform: scale(0);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(4);
+          opacity: 0;
+        }
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .animated {
+        animation-duration: 1s;
+        animation-fill-mode: both;
+      }
+      .fadeInUp {
+        animation-name: fadeInUp;
+      }
+      .fadeIn {
+        animation-name: fadeIn;
+      }
+      .slideInLeft {
+        animation-name: slideInLeft;
+      }
+      .slideInRight {
+        animation-name: slideInRight;
+      }
+      .delay-1 {
+        animation-delay: 0.3s;
+      }
+      .delay-2 {
+        animation-delay: 0.6s;
+      }
+      .delay-3 {
+        animation-delay: 0.9s;
+      }
+      .pulse-hover:hover {
+        animation: pulse 0.5s ease-in-out;
+      }
+      .float-hover:hover {
+        animation: float 3s ease-in-out infinite;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      header {
+        background-color: var(--deep-blue);
+        color: var(--white);
+        padding: 15px 0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 1s ease-out;
+      }
+      .header-container {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        gap: 20px;
+        align-items: start;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+      .logo-placeholder {
+        width: 60px;
+        height: 60px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        transition: all 0.3s;
+        flex-shrink: 0;
+        padding: 5px;
+      }
+      .logo-placeholder img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: contain;
+      }
+      .logo-placeholder:hover {
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(255, 107, 0, 0.3);
+      }
+      .company-name h1 {
+        font-size: 24px;
+        line-height: 1.2;
+        word-break: break-word;
+      }
+      .company-name h2 {
+        font-size: 16px;
+        font-weight: normal;
+        color: var(--light-gray);
+        word-break: break-word;
+      }
+
+      .header-requisites {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 5px 0;
+      }
+      .requisite-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        color: var(--light-gray);
+        line-height: 1.3;
+      }
+      .requisite-item i {
+        color: var(--orange-primary);
+        font-size: 12px;
+        width: 14px;
+        flex-shrink: 0;
+      }
+      .requisite-item strong {
+        color: var(--white);
+        font-weight: 600;
+        margin-right: 3px;
+      }
+
+      .contact-info {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        text-align: right;
+      }
+      .contact-info a {
+        color: var(--white);
+        text-decoration: none;
+        transition: color 0.3s;
+        word-break: break-all;
+      }
+      .contact-info a:hover {
+        color: var(--orange-primary);
+      }
+      .contact-info i {
+        margin-right: 8px;
+        color: var(--orange-primary);
+      }
+
+      nav {
+        background-color: var(--steel-blue);
+        padding: 10px 0;
+        position: relative;
+      }
+      .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+      }
+      .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 30px;
+        flex-wrap: wrap;
+      }
+      .nav-links a {
+        color: var(--white);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s;
+        padding: 5px 0;
+        position: relative;
+        white-space: nowrap;
+      }
+      .nav-links a:hover {
+        color: var(--orange-light);
+      }
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        background-color: var(--orange-primary);
+        bottom: 0;
+        left: 0;
+        transition: width 0.3s;
+      }
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+      .mobile-menu-btn {
+        display: none;
+        background: none;
+        border: none;
+        color: var(--white);
+        font-size: 24px;
+        cursor: pointer;
+        transition: transform 0.3s;
+        padding: 5px;
+        z-index: 1001;
+      }
+      .mobile-menu-btn:hover {
+        transform: scale(1.1);
+      }
+
+      .hero {
+        background:
+          linear-gradient(rgba(26, 54, 93, 0.85), rgba(26, 54, 93, 0.9)),
+          url("images/backk.jpeg") center/cover no-repeat;
+        color: var(--white);
+        padding: 100px 0;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          45deg,
+          rgba(255, 107, 0, 0.1) 0%,
+          transparent 50%
+        );
+        z-index: 0;
+      }
+      .hero > .container {
+        position: relative;
+        z-index: 1;
+      }
+      .hero h1 {
+        font-size: 42px;
+        margin-bottom: 20px;
+        line-height: 1.2;
+        word-wrap: break-word;
+      }
+      .hero p {
+        font-size: 20px;
+        max-width: 800px;
+        margin: 0 auto 30px;
+        color: var(--light-gray);
+        word-wrap: break-word;
+      }
+      .cta-button {
+        display: inline-block;
+        background-color: var(--orange-primary);
+        color: var(--white);
+        padding: 15px 40px;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: all 0.3s;
+        font-size: 18px;
+        border: none;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(255, 107, 0, 0.3);
+        width: auto;
+        max-width: 100%;
+      }
+      .cta-button:hover {
+        background-color: var(--orange-dark);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(255, 107, 0, 0.4);
+      }
+
+      section {
+        padding: 80px 0;
+      }
+      .section-title {
+        text-align: center;
+        color: var(--deep-blue);
+        font-size: 36px;
+        margin-bottom: 50px;
+        position: relative;
+        word-wrap: break-word;
+      }
+      .section-title::after {
+        content: "";
+        position: absolute;
+        width: 100px;
+        height: 4px;
+        background-color: var(--orange-primary);
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .products {
+        background-color: var(--white);
+      }
+      .products-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 40px;
+      }
+      .product-card {
+        background-color: var(--white);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+      .product-card:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(255, 107, 0, 0.1);
+      }
+      .img-placeholder {
+        height: 250px;
+        background-color: var(--light-gray);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        flex-shrink: 0;
+      }
+      .img-placeholder img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+      .product-card:hover .img-placeholder img {
+        transform: scale(1.1);
+      }
+      .product-content {
+        padding: 25px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      .product-title {
+        color: var(--deep-blue);
+        font-size: 24px;
+        margin-bottom: 15px;
+        word-wrap: break-word;
+      }
+      .product-description {
+        color: var(--steel-gray);
+        line-height: 1.7;
+        flex-grow: 1;
+      }
+
+      .about {
+        background-color: #f1f5f9;
+      }
+      .about-content {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .about-text {
+        font-size: 18px;
+        line-height: 1.8;
+        margin-bottom: 30px;
+        text-align: center;
+        word-wrap: break-word;
+      }
+      .benefits {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        margin-top: 50px;
+      }
+      .benefit-item {
+        text-align: center;
+        padding: 30px 20px;
+        background-color: var(--white);
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+      .benefit-item:hover {
+        transform: translateY(-5px);
+      }
+      .benefit-icon {
+        font-size: 40px;
+        color: var(--orange-primary);
+        margin-bottom: 20px;
+        transition: all 0.3s ease;
+        flex-shrink: 0;
+      }
+      .benefit-item:hover .benefit-icon {
+        transform: scale(1.2) rotate(5deg);
+        color: var(--orange-dark);
+      }
+      .benefit-title {
+        color: var(--deep-blue);
+        font-size: 20px;
+        margin-bottom: 10px;
+        word-wrap: break-word;
+      }
+
+      .progress-container {
+        width: 100%;
+        background-color: var(--light-gray);
+        border-radius: 10px;
+        margin: 20px 0;
+        overflow: hidden;
+      }
+      .progress-bar {
+        height: 10px;
+        background-color: var(--orange-primary);
+        width: 0;
+        transition: width 1.5s ease-in-out;
+        border-radius: 10px;
+      }
+
+      .leadership {
+        background-color: var(--white);
+      }
+      .director-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+      .director-photo {
+        width: 300px;
+        height: 350px;
+        margin-bottom: 30px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        flex-shrink: 0;
+      }
+      .director-photo .img-placeholder {
+        height: 100%;
+        background: var(--light-gray);
+      }
+      .director-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+      .director-photo:hover img {
+        transform: scale(1.05);
+      }
+      .director-info {
+        text-align: center;
+        width: 100%;
+      }
+      .director-name {
+        color: var(--deep-blue);
+        font-size: 28px;
+        margin-bottom: 10px;
+        word-wrap: break-word;
+      }
+      .director-position {
+        color: var(--steel-gray);
+        font-size: 18px;
+        margin-bottom: 30px;
+        word-wrap: break-word;
+      }
+      .director-message {
+        font-style: italic;
+        line-height: 1.8;
+        font-size: 18px;
+        border-left: 4px solid var(--orange-primary);
+        padding-left: 20px;
+        margin-bottom: 20px;
+        text-align: left;
+        word-wrap: break-word;
+      }
+      .director-contact {
+        color: var(--steel-gray);
+        margin-top: 20px;
+        word-wrap: break-word;
+      }
+
+      .payment-shipping {
+        background-color: #f1f5f9;
+      }
+      .payment-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 50px;
+      }
+      .payment-card,
+      .shipping-card {
+        background-color: var(--white);
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+      .payment-title,
+      .shipping-title {
+        color: var(--deep-blue);
+        font-size: 24px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        word-wrap: break-word;
+      }
+      .payment-title i,
+      .shipping-title i {
+        color: var(--orange-primary);
+      }
+      .payment-text,
+      .shipping-text {
+        line-height: 1.8;
+        color: var(--steel-gray);
+        margin-bottom: 20px;
+        flex-grow: 1;
+      }
+
+      .contact-form-section {
+        background-color: var(--white);
+        padding: 100px 0;
+        position: relative;
+      }
+      .contact-form-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(
+          90deg,
+          var(--orange-primary),
+          var(--deep-blue)
+        );
+      }
+      .form-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+      .form-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        background: var(--white);
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+        padding: 0;
+      }
+      .form-info {
+        padding: 60px 40px;
+        background: linear-gradient(
+          135deg,
+          var(--deep-blue) 0%,
+          var(--steel-blue) 100%
+        );
+        color: var(--white);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .form-info h2 {
+        font-size: 36px;
+        margin-bottom: 20px;
+        line-height: 1.2;
+        color: var(--white);
+        word-wrap: break-word;
+      }
+      .form-info h2 span {
+        color: var(--orange-primary);
+      }
+      .form-info p {
+        font-size: 18px;
+        line-height: 1.6;
+        margin-bottom: 30px;
+        opacity: 0.9;
+        word-wrap: break-word;
+      }
+      .benefits-list {
+        list-style: none;
+        margin-top: 30px;
+      }
+      .benefits-list li {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 20px;
+        font-size: 16px;
+      }
+      .benefits-list i {
+        color: var(--orange-primary);
+        margin-right: 15px;
+        font-size: 20px;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+
+      .contact-form {
+        padding: 60px 40px;
+        display: flex;
+        flex-direction: column;
+      }
+      .form-title {
+        font-size: 28px;
+        color: var(--deep-blue);
+        margin-bottom: 10px;
+        word-wrap: break-word;
+      }
+      .form-subtitle {
+        color: var(--steel-gray);
+        margin-bottom: 40px;
+        font-size: 16px;
+        word-wrap: break-word;
+      }
+      .form-group {
+        margin-bottom: 25px;
+        position: relative;
+      }
+      .form-label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: var(--deep-blue);
+        font-size: 15px;
+        word-wrap: break-word;
+      }
+      .form-input,
+      .form-select,
+      .form-textarea {
+        width: 100%;
+        padding: 15px 20px;
+        border: 2px solid var(--light-gray);
+        border-radius: 8px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        background-color: var(--white);
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+      }
+      .form-input:focus,
+      .form-select:focus,
+      .form-textarea:focus {
+        outline: none;
+        border-color: var(--orange-primary);
+        box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.1);
+      }
+      .form-textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+      .required::after {
+        content: " *";
+        color: var(--accent);
+      }
+      .submit-btn {
+        background: linear-gradient(
+          135deg,
+          var(--orange-primary) 0%,
+          var(--orange-dark) 100%
+        );
+        color: var(--white);
+        border: none;
+        padding: 18px 40px;
+        font-size: 18px;
+        font-weight: 600;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        box-shadow: 0 5px 15px rgba(255, 107, 0, 0.3);
+        margin-top: 10px;
+        width: 100%;
+      }
+      .submit-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(255, 107, 0, 0.4);
+      }
+      .submit-btn:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .success-message {
+        text-align: center;
+        padding: 60px 40px;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--white);
+      }
+      .success-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 30px;
+      }
+      .success-icon i {
+        font-size: 40px;
+        color: var(--white);
+      }
+      .success-message h3 {
+        font-size: 32px;
+        color: var(--deep-blue);
+        margin-bottom: 20px;
+        word-wrap: break-word;
+      }
+      .success-message p {
+        font-size: 18px;
+        color: var(--steel-gray);
+        line-height: 1.6;
+        max-width: 500px;
+        word-wrap: break-word;
+      }
+      .timer {
+        font-size: 18px;
+        font-weight: bold;
+        color: var(--orange-primary);
+        margin-top: 20px;
+      }
+      .error-message {
+        color: var(--accent);
+        font-size: 14px;
+        margin-top: 8px;
+        display: none;
+      }
+
+      @keyframes scaleIn {
+        from {
+          transform: scale(0);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      footer {
+        background-color: var(--deep-blue);
+        color: var(--white);
+        padding-top: 60px;
+      }
+      .footer-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 40px;
+      }
+      .footer-section h3 {
+        font-size: 22px;
+        margin-bottom: 25px;
+        color: var(--light-gray);
+        position: relative;
+        padding-bottom: 10px;
+        word-wrap: break-word;
+      }
+      .footer-section h3::after {
+        content: "";
+        position: absolute;
+        width: 50px;
+        height: 3px;
+        background-color: var(--orange-primary);
+        bottom: 0;
+        left: 0;
+      }
+      .map-container {
+        height: 200px;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+      }
+      .map-frame {
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+      .location-name {
+        color: var(--light-gray);
+        margin-bottom: 5px;
+        font-weight: bold;
+        word-wrap: break-word;
+      }
+      .location-address {
+        color: var(--steel-gray);
+        font-size: 14px;
+        line-height: 1.5;
+        word-wrap: break-word;
+      }
+      .requisites {
+        font-size: 14px;
+        line-height: 1.8;
+        color: var(--steel-gray);
+        word-wrap: break-word;
+      }
+      .requisites strong {
+        color: var(--light-gray);
+      }
+      .contact-details {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+      .contact-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .contact-item i {
+        color: var(--orange-primary);
+        width: 20px;
+        flex-shrink: 0;
+        margin-top: 3px;
+      }
+      .contact-item span {
+        word-break: break-word;
+      }
+      .contact-item a:hover {
+        color: var(--orange-primary) !important;
+      }
+      .copyright {
+        text-align: center;
+        padding: 30px 0;
+        margin-top: 60px;
+        border-top: 1px solid var(--steel-blue);
+        color: var(--steel-gray);
+        font-size: 14px;
+        word-wrap: break-word;
+      }
+
+      @media (max-width: 992px) {
+        .form-wrapper {
+          grid-template-columns: 1fr;
+          gap: 0;
+        }
+        .form-info {
+          padding: 40px 30px;
+        }
+        .contact-form {
+          padding: 40px 30px;
+        }
+        .header-container {
+          grid-template-columns: 1fr;
+          gap: 15px;
+        }
+        .contact-info {
+          text-align: left;
+        }
+      }
+      @media (max-width: 850px) {
+        .header-container {
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
+          align-items: flex-start;
+        }
+        .contact-info {
+          display: none;
+        }
+        header {
+          position: static;
+        }
+        nav {
+          position: static;
+        }
+        .nav-links {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100vh;
+          background-color: var(--deep-blue);
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          padding: 20px;
+          z-index: 1000;
+          gap: 30px;
+          transform: translateX(-100%);
+          transition: transform 0.3s ease;
+        }
+        .nav-links.active {
+          display: flex;
+          transform: translateX(0);
+        }
+        .mobile-menu-btn {
+          display: block;
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          z-index: 1001;
+          background-color: var(--deep-blue);
+          padding: 10px;
+          border-radius: 5px;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .mobile-menu-btn.active {
+          background-color: var(--orange-primary);
+        }
+        .hero h1 {
+          font-size: 28px;
+        }
+        .hero p {
+          font-size: 18px;
+        }
+        section {
+          padding: 60px 0;
+        }
+      }
+      @media (max-width: 576px) {
+        .hero h1 {
+          font-size: 24px;
+        }
+        .section-title {
+          font-size: 22px;
+        }
+        .form-info {
+          padding: 30px 20px;
+        }
+        .contact-form {
+          padding: 30px 20px;
+        }
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease;
+      }
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .counter {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: var(--orange-primary);
+      }
+      .spinner {
+        width: 40px;
+        height: 40px;
+        border: 4px solid var(--light-gray);
+        border-top: 4px solid var(--orange-primary);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 20px auto;
+      }
+
+      /* News Section */
+      .news {
+        padding: 80px 0;
+        background-color: #f9fafb;
+      }
+      .news-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+      }
+      .news-card {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 18px rgba(0,0,0,0.07);
+        padding: 28px 28px 24px;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.3s, box-shadow 0.3s;
+        border-top: 4px solid var(--orange-primary);
+      }
+      .news-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+      }
+      .news-date {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--orange-primary);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 10px;
+      }
+      .news-card h3 {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--deep-blue);
+        margin-bottom: 14px;
+        line-height: 1.4;
+      }
+      .news-card p {
+        font-size: 14px;
+        color: #555;
+        line-height: 1.65;
+        flex: 1;
+      }
+      .news-link {
+        display: inline-block;
+        margin-top: 16px;
+        font-size: 13px;
+        color: var(--orange-primary);
+        font-weight: 600;
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .news-link:hover { color: var(--orange-dark); text-decoration: underline; }
+      @media (max-width: 768px) {
+        .news-grid { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="container header-container">
+        <div class="logo">
+          <div class="logo-placeholder pulse-hover">
+            <svg viewBox="0 0 198.43 198.43" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="width:100%;height:100%" xml:space="preserve" overflow="hidden"><g><rect x="0" y="0" width="198.43" height="198.43" fill="#B3B2B2"/><g><path d="M22.33 149.46C21.03 150.3 19.72 151.14 18.31 152.05 17.37 150.54 16.49 149.12 15.55 147.6 16.97 146.76 18.31 145.97 19.68 145.16 18.1 142.04 16.55 138.97 14.93 135.77 13.55 136.35 12.13 136.94 10.51 137.62 9.86 136.01 9.23 134.43 8.57 132.77 10.13 132.17 11.54 131.63 13.03 131.05 12.01 127.71 10.99 124.39 9.95 120.97 8.45 121.32 6.95 121.66 5.31 122.04 4.93 120.32 4.56 118.7 4.17 116.95 5.81 116.62 7.36 116.3 8.88 115.99 8.44 112.53 8.01 109.14 7.56 105.57 6.08 105.65 4.54 105.74 2.83 105.84 2.83 104.13 2.83 102.47 2.83 100.63 4.22 100.63 5.76 100.63 7.37 100.63 7.51 97.02 7.65 93.57 7.79 90.01 6.27 89.84 4.77 89.68 3.07 89.49 3.28 87.75 3.48 86.06 3.7 84.3 5.34 84.54 6.84 84.76 8.44 85 9.17 81.6 9.9 78.19 10.65 74.69 9.48 74.36 8.28 73.96 7.06 73.69 6.3 73.52 6.07 73.21 6.32 72.46 6.75 71.14 7.14 69.81 7.58 68.36 9.15 68.87 10.61 69.35 12.13 69.84 13.44 66.59 14.74 63.37 16.07 60.05 14.7 59.39 13.31 58.72 11.76 57.98 12.54 56.43 13.31 54.91 14.12 53.29 15.56 54.06 16.93 54.78 18.35 55.54 20.2 52.55 22.03 49.58 23.89 46.57 22.63 45.67 21.36 44.77 20 43.8 21.02 42.41 22.01 41.06 23.09 39.58 24.39 40.59 25.64 41.55 26.9 42.51 29.22 39.87 31.5 37.28 33.86 34.59 32.75 33.58 31.61 32.54 30.56 31.59 31.86 30.13 33 28.85 34.2 27.51 35.39 28.81 36.44 29.96 37.5 31.12 40.23 28.91 42.91 26.74 45.68 24.49 44.81 23.24 43.92 21.97 42.95 20.58 44.36 19.61 45.75 18.66 47.26 17.62 48.15 18.99 48.99 20.29 49.87 21.64 52.94 19.93 55.98 18.23 59.08 16.5 58.41 15.09 57.74 13.7 57.02 12.18 58.58 11.46 60.11 10.77 61.77 10 62.43 11.51 63.06 12.95 63.7 14.41 67.01 13.24 70.25 12.09 73.62 10.89 73.21 9.42 72.8 7.93 72.35 6.29 74.05 5.84 75.7 5.41 77.42 4.96 77.81 6.59 78.16 8.06 78.53 9.61 81.96 9.03 85.35 8.46 88.89 7.87 88.75 6.31 88.62 4.75 88.47 3.07 90.25 2.94 91.87 2.82 93.6 2.69 93.73 4.37 93.85 5.91 93.97 7.43 97.48 7.43 100.89 7.43 104.44 7.43 104.55 5.95 104.67 4.41 104.81 2.7 106.5 2.82 108.13 2.93 109.95 3.06 109.81 4.68 109.67 6.21 109.52 7.86 112.98 8.45 116.4 9.03 119.9 9.62 120.26 8.11 120.61 6.64 121.01 4.97 122.71 5.41 124.35 5.84 126.08 6.28 125.63 7.91 125.22 9.39 124.81 10.88 128.16 12.07 131.4 13.22 134.73 14.4 135.33 13 135.95 11.57 136.63 10 138.22 10.71 139.74 11.39 141.41 12.14 140.71 13.62 140.04 15.04 139.35 16.49 142.42 18.21 145.43 19.89 148.55 21.63 149.38 20.35 150.23 19.05 151.16 17.62 152.6 18.59 153.98 19.53 155.49 20.54 154.55 21.88 153.66 23.15 152.74 24.46 155.44 26.65 158.12 28.82 160.92 31.09 161.95 29.97 163.03 28.81 164.27 27.46 165.4 28.81 166.49 30.09 167.62 31.44 166.71 32.28 165.56 33.33 164.4 34.39 166.9 37.22 169.2 39.84 171.54 42.49 172.78 41.53 174.01 40.57 175.32 39.56 176.36 40.96 177.36 42.32 178.43 43.76 177.1 44.71 175.84 45.61 174.55 46.55 176.38 49.52 178.2 52.48 180.07 55.52 181.45 54.79 182.82 54.07 184.3 53.29 185.09 54.85 185.87 56.37 186.68 57.96 185.18 58.68 183.78 59.35 182.36 60.03 183.68 63.32 184.98 66.55 186.3 69.83 187.77 69.35 189.25 68.86 190.85 68.33 191.35 69.98 191.84 71.58 192.37 73.32 190.77 73.79 189.29 74.23 187.78 74.68 188.52 78.13 189.25 81.53 189.98 84.98 191.54 84.75 193.03 84.53 194.7 84.28 194.92 86.01 195.14 87.69 195.37 89.47 193.7 89.65 192.21 89.81 190.63 89.98 190.77 93.5 190.9 96.95 191.04 100.51 192.56 100.51 194.06 100.51 195.62 100.51 195.62 102.33 195.62 104.03 195.62 105.81 193.93 105.72 192.38 105.64 190.85 105.56 190.41 109.05 189.97 112.43 189.52 115.96 191.01 116.26 192.55 116.58 194.22 116.92 193.85 118.62 193.5 120.25 193.12 122.01 191.51 121.64 190.01 121.29 188.47 120.94 187.45 124.28 186.44 127.58 185.38 131.01 186.77 131.54 188.2 132.1 189.83 132.73 189.21 134.33 188.6 135.88 187.94 137.58 186.4 136.95 184.95 136.35 183.49 135.75 181.9 138.9 180.34 141.98 178.74 145.14 180.07 145.93 181.4 146.72 182.87 147.59 181.95 149.07 181.07 150.49 180.12 152.03 178.74 151.15 177.44 150.31 176.09 149.45 174.01 152.26 171.93 155.06 169.82 157.91 172.2 159.93 173.47 161 172.33 162.31 171.22 163.57 170.03 164.93 168.8 163.81 167.64 162.74 166.49 161.69 163.97 164.11 161.5 166.48 158.9 168.97 159.86 170.12 160.88 171.34 161.97 172.66 160.62 173.74 159.28 174.81 157.88 175.92 156.86 174.61 155.94 173.41 154.96 172.16 152.07 174.11 149.21 176.04 146.23 178.05 146.98 179.34 147.76 180.67 148.64 182.17 147.13 183.03 145.65 183.87 144.09 184.76 143.3 183.3 142.57 181.93 141.81 180.54 138.61 181.99 135.47 183.4 132.21 184.87 132.74 186.29 133.28 187.73 133.88 189.36 132.25 189.94 130.68 190.49 128.96 191.1 128.45 189.58 127.96 188.12 127.43 186.57 124.04 187.44 120.68 188.31 117.23 189.2 117.51 190.75 117.79 192.27 118.09 193.9 116.37 194.2 114.76 194.48 112.98 194.79 112.72 193.2 112.47 191.64 112.22 190.04 108.77 190.33 105.37 190.61 101.83 190.91 101.83 192.39 101.83 193.98 101.83 195.67 100.07 195.67 98.44 195.67 96.72 195.67 96.72 194.04 96.72 192.5 96.72 190.92 93.2 190.63 89.77 190.35 86.22 190.05 85.98 191.59 85.73 193.16 85.47 194.79 83.76 194.49 82.15 194.22 80.35 193.91 80.64 192.3 80.92 190.75 81.2 189.2 77.77 188.31 74.44 187.44 71.02 186.55 70.52 188.03 70.03 189.49 69.5 191.08 67.83 190.5 66.25 189.95 64.57 189.36 65.15 187.8 65.69 186.35 66.24 184.86 63.06 183.42 59.92 182.01 56.65 180.53 55.93 181.85 55.2 183.21 54.37 184.73 52.85 183.88 51.38 183.06 49.81 182.18 50.66 180.73 51.44 179.39 52.22 178.05 49.3 176.08 46.45 174.14 43.49 172.14 42.54 173.36 41.6 174.58 40.57 175.91 39.19 174.81 37.87 173.77 36.47 172.66 37.53 171.4 38.52 170.22 39.57 168.97 37.06 166.57 34.57 164.18 31.98 161.69 30.84 162.72 29.68 163.79 28.44 164.92 27.27 163.59 26.16 162.33 24.98 160.99 26.23 159.93 27.41 158.93 28.63 157.9 26.49 155.08 24.42 152.28 22.33 149.46Z" fill="#FFFFFF"/><g><circle cx="73.07" cy="122.31" r="11.47" fill="#474A51"/><circle cx="99.74" cy="122.31" r="11.47" fill="#474A51"/><circle cx="125.36" cy="122.31" r="11.47" fill="#474A51"/><circle cx="87.43" cy="98.83" r="11.47" fill="#474A51"/><circle cx="113.42" cy="98.5" r="11.47" fill="#474A51"/><circle cx="101.95" cy="76.12" r="11.47" fill="#474A51"/></g></g></g></svg>
+          </div>
+          <div class="company-name">
+            <h1>ТЕХНОПРОМ</h1>
+            <h2>Общество с ограниченной ответственностью</h2>
+          </div>
+        </div>
+
+        <!-- ✅ YANGILANGAN: КПП va Manzil -->
+        <div class="header-requisites">
+          <div class="requisite-item">
+            <i class="fas fa-building"></i>
+            <span><strong>ИНН/КПП:</strong> 7017461443 / 421201001</span>
+          </div>
+          <div class="requisite-item">
+            <i class="fas fa-id-card"></i>
+            <span><strong>ОГРН:</strong> 1197031058927</span>
+          </div>
+          <div class="requisite-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span
+              ><strong>Адрес:</strong> г. Кемерово, ул. 1-я Стахановская, дом
+              35, офис 301</span
+            >
+          </div>
+        </div>
+
+        <div class="contact-info">
+          <a href="mailto:technoprom70@yandex.ru"
+            ><i class="fas fa-envelope"></i> technoprom70@yandex.ru</a
+          >
+          <a href="tel:+79952944410"
+            ><i class="fas fa-phone"></i> +7 (995) 294-44-10</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+      <div class="container nav-container">
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+          <i class="fas fa-bars"></i>
+        </button>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#about">О компании</a></li>
+          <li><a href="#products">Продукция</a></li>
+          <li><a href="#leadership">Руководство</a></li>
+          <li><a href="#payment">Оплата и доставка</a></li>
+          <li><a href="#news">Новости</a></li>
+          <li><a href="#contacts">Контакты</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <h1 class="animated fadeInUp">
+          ТЕХНОПРОМ — надежный поставщик мелющих шаров и МВСП по всей России
+        </h1>
+        <p class="animated fadeInUp delay-1">
+          Оптовые поставки материалов верхнего строения пути и мелющих шаров
+          всех диаметров от крупнейших российских производителей
+        </p>
+        <button
+          class="cta-button animated fadeInUp delay-2 pulse-hover"
+          id="priceBtn"
+        >
+          Скачать прайс-лист
+        </button>
+      </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+      <div class="container">
+        <h2 class="section-title reveal">Наша продукция</h2>
+        <div class="products-container">
+          <div class="product-card reveal">
+            <div class="img-placeholder">
+              <img src="images/buble.jpg" alt="Мелющие шары" />
+            </div>
+            <div class="product-content">
+              <h3 class="product-title">Шары мелющие</h3>
+              <p class="product-description">
+                Высококачественные мелющие шары для горно-обогатительной и
+                цементной промышленности. Поставляем шары всех диаметров от
+                ведущих российских производителей.
+              </p>
+            </div>
+          </div>
+          <div class="product-card reveal">
+            <div class="img-placeholder">
+              <img src="images/rels.jpg" alt="МВСП и Рельсы" />
+            </div>
+            <div class="product-content">
+              <h3 class="product-title">МВСП и Рельсы</h3>
+              <p class="product-description">
+                Все виды рельсов и необходимые элементы скрепления для верхнего
+                строения пути. Большая часть продукции всегда в наличии на
+                складе в г. Новокузнецке.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+      <div class="container">
+        <h2 class="section-title reveal">О компании</h2>
+        <div class="about-content">
+          <p class="about-text reveal">
+            Компания «ТЕХНОПРОМ» специализируется на поставках шаров мелющих
+            всех диаметров и материалов верхнего строения пути (МВСП). Мы
+            поставляем высококачественную продукцию по всей территории России
+            более 6 лет.
+          </p>
+          <div class="reveal" style="max-width: 600px; margin: 40px auto">
+            <p style="text-align: center; margin-bottom: 10px">
+              Наш опыт на рынке
+            </p>
+            <div class="progress-container">
+              <div class="progress-bar" id="experience-bar"></div>
+            </div>
+            <div style="text-align: center; margin-top: 10px">
+              <span class="counter" id="years-counter">0</span> лет
+            </div>
+          </div>
+          <div class="benefits">
+            <div class="benefit-item reveal">
+              <div class="benefit-icon">
+                <i class="fas fa-shipping-fast"></i>
+              </div>
+              <h3 class="benefit-title">Быстрая отгрузка</h3>
+              <p>
+                Большая часть продукции всегда в наличии на складе в
+                Новокузнецке
+              </p>
+            </div>
+            <div class="benefit-item reveal">
+              <div class="benefit-icon"><i class="fas fa-handshake"></i></div>
+              <h3 class="benefit-title">Гибкие цены</h3>
+              <p>
+                Работаем напрямую с производителями, предлагаем выгодные условия
+              </p>
+            </div>
+            <div class="benefit-item reveal">
+              <div class="benefit-icon">
+                <i class="fas fa-truck-loading"></i>
+              </div>
+              <h3 class="benefit-title">Доставка по РФ</h3>
+              <p>
+                Организуем доставку ж/д и автотранспортом в любой регион России
+              </p>
+            </div>
+            <div class="benefit-item reveal">
+              <div class="benefit-icon"><i class="fas fa-industry"></i></div>
+              <h3 class="benefit-title">Только опт</h3>
+              <p>Сотрудничаем с крупнейшими заводами-производителями России</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Leadership Section -->
+    <section class="leadership" id="leadership">
+      <div class="container">
+        <h2 class="section-title reveal">Руководство</h2>
+        <div class="director-container">
+          <div class="director-photo reveal">
+            <div class="img-placeholder">
+              <img src="images/boss.jpg" alt="Забелин Александр Петрович" />
+            </div>
+          </div>
+          <div class="director-info">
+            <h3 class="director-name reveal">Забелин Александр Петрович</h3>
+            <p class="director-position reveal">Директор ООО «ТЕХНОПРОМ»</p>
+            <blockquote class="director-message reveal">
+              Уважаемый Партнер! Наша компания работает на рынке более 6 лет и
+              за это время зарекомендовала себя как надежный поставщик. Огромное
+              внимание мы уделяем качеству сервиса. Обороты нашей компании
+              позволяют нам закупать продукцию у крупнейших производителей
+              крупными партиями, что делает наши цены конкурентными. Если Вы
+              являетесь компанией крупного сегмента, то мы готовы согласовать
+              работу с отсрочкой платежа.
+            </blockquote>
+            <p class="director-contact reveal">
+              По вопросам качества и предложения о сотрудничестве, Вы можете
+              направить на адрес: <strong>zabelin_92@internet.ru</strong>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Payment & Shipping Section -->
+    <section class="payment-shipping" id="payment">
+      <div class="container">
+        <h2 class="section-title reveal">Условия работы</h2>
+        <div class="payment-container">
+          <div class="payment-card slideInLeft animated">
+            <h3 class="payment-title">
+              <i class="fas fa-credit-card"></i> Оплата
+            </h3>
+            <p class="payment-text">
+              Оплата за металлопрокат нужного сортамента в компании «ТЕХНОПРОМ»
+              принимается в безналичной форме. После согласования всех деталей
+              менеджеры в течение 2 часов выставляют счет для оплаты.
+            </p>
+            <p class="payment-text">
+              Всю бухгалтерскую документацию мы готовим оперативно и в полном
+              соответствии с официальными требованиями.
+            </p>
+          </div>
+          <div class="shipping-card slideInRight animated">
+            <h3 class="shipping-title">
+              <i class="fas fa-truck"></i> Доставка
+            </h3>
+            <p class="shipping-text">
+              Доставка организуется во все регионы РФ. Для бережной и
+              оперативной транспортировки металла задействуется железнодорожный
+              и автомобильный транспорт.
+            </p>
+            <p class="shipping-text">
+              Чтобы уточнить условия поставки, позвоните нам по телефону:
+              <strong>+7 (995) 294-44-10</strong> или напишите в
+              <a
+                href="https://t.me/+79952944410"
+                target="_blank"
+                style="color: var(--orange-primary); text-decoration: none"
+                >Telegram</a
+              >.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- News Section -->
+    <section class="news" id="news">
+      <div class="container">
+        <h2 class="section-title reveal">Новости</h2>
+        <div class="news-grid">
+
+          <div class="news-card reveal">
+            <div class="news-date">01 июня 2025</div>
+            <h3>Решение о строительстве комплексного предприятия по разведению и выращиванию форели мощностью 6400 тонн в год</h3>
+            <p>ООО «Технопром» планирует строительство и запуск промышленного предприятия по разведению и выращиванию форели с полным циклом производства объёмом 6 400 тонн рыбы в год. Проект разработан при поддержке РАН и инновационного центра «Сколково».</p>
+          </div>
+
+          <div class="news-card reveal">
+            <div class="news-date">25 декабря 2025</div>
+            <h3>О подписании соглашения с Правительством Кемеровской Области</h3>
+            <p>Проект по «Организации промышленного производства по выращиванию и дальнейшей переработке форели в Кемерово» одобрен правительством. 23 декабря 2025 г. заключено Соглашение № 1231-16 об инвестиционной деятельности между Кемеровской областью — Кузбассом и ООО «Технопром».</p>
+            <a class="news-link" href="https://bulleten-kuzbass.ru/bulletin/330125" target="_blank">Официальное распоряжение →</a>
+          </div>
+
+          <div class="news-card reveal">
+            <div class="news-date">01 апреля 2026</div>
+            <h3>ООО «Технопром» объявляет финансовые результаты за 2025 год</h3>
+            <p>Годовая выручка составила 2,2 млрд рублей — прирост на 29% к 2024 г. Чистая прибыль выросла в 10 раз и составила 192 млн рублей. Капитал компании достиг 250 млн рублей (+309% к 2024 г.). EBITDA увеличилась на 955% и составила 256 млн рублей. Прогнозная выручка по итогам 2026 года — 4,2 млрд рублей.</p>
+          </div>
+
+          <div class="news-card reveal">
+            <div class="news-date">28 мая 2026</div>
+            <h3>ООО «Технопром» объявляет о размещении дебютного выпуска ЦФА</h3>
+            <p>Старт размещения дебютного выпуска долговых ЦФА на платформе «Токеон» (тикер: THPR1). Объём выпуска: 30 млн руб., ставка 23% годовых, срок обращения ~6 месяцев. Приём заявок: с 28.05.2026 по 08.06.2026.</p>
+            <a class="news-link" href="https://tokeon.ru/vypuski/THPR1?utm_source=agent&utm_medium=THPR1&utm_campaign=referral&utm_term=6aca47c6-fc49-4903-8225-2a2a03fc5450" target="_blank">Принять участие на платформе Токеон →</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="contact-form-section" id="contact-form">
+      <div class="form-container">
+        <div class="form-wrapper">
+          <div class="form-info">
+            <h2>Получите <span>коммерческое предложение</span></h2>
+            <p>
+              Отправьте заявку и наш специалист свяжется с вами в течение 30
+              минут для уточнения деталей и расчета стоимости.
+            </p>
+            <ul class="benefits-list">
+              <li>
+                <i class="fas fa-check-circle"></i
+                ><span>Бесплатная консультация по подбору продукции</span>
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i
+                ><span>Рассчет стоимости в течение 2 часов</span>
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i
+                ><span>Гибкие условия сотрудничества</span>
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i
+                ><span>Персональный менеджер</span>
+              </li>
+            </ul>
+          </div>
+          <div class="contact-form-container">
+            <form id="contactForm" class="contact-form">
+              <h3 class="form-title">Запрос коммерческого предложения</h3>
+              <p class="form-subtitle">
+                Заполните форму и мы свяжемся с вами в кратчайшие сроки
+              </p>
+              <div class="form-group">
+                <label for="name" class="form-label required">Ваше имя</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  class="form-input"
+                  placeholder="Иван Иванов"
+                  required
+                />
+                <div class="error-message" id="name-error">
+                  Пожалуйста, введите ваше имя
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="phone" class="form-label required"
+                  >Номер телефона</label
+                >
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  class="form-input"
+                  placeholder="+7 (___) ___-__-__"
+                  required
+                />
+                <div class="error-message" id="phone-error">
+                  Пожалуйста, введите корректный номер телефона
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="product" class="form-label required"
+                  >Интересующая продукция</label
+                >
+                <select
+                  id="product"
+                  name="product"
+                  class="form-select"
+                  required
+                >
+                  <option value="" disabled selected>Выберите продукцию</option>
+                  <option value="Мелющие шары">Мелющие шары</option>
+                  <option value="МВСП / Рельсы">МВСП / Рельсы</option>
+                  <option value="Другое">Другое</option>
+                </select>
+                <div class="error-message" id="product-error">
+                  Пожалуйста, выберите интересующую продукцию
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="message" class="form-label">Комментарий</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  class="form-textarea"
+                  placeholder="Опишите ваши потребности, необходимые объемы или задайте вопрос"
+                ></textarea>
+              </div>
+              <button type="submit" class="submit-btn" id="submitBtn">
+                <span>Отправить заявку</span>
+                <i class="fas fa-paper-plane"></i>
+              </button>
+            </form>
+            <div class="success-message" id="successMessage">
+              <div class="success-icon"><i class="fas fa-check"></i></div>
+              <h3>Спасибо за вашу заявку!</h3>
+              <p>
+                Наш менеджер свяжется с вами в течение
+                <strong>2 часов</strong> для уточнения деталей и подготовки
+                коммерческого предложения.
+              </p>
+              <div class="timer">Ожидайте звонка</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contacts">
+      <div class="container">
+        <div class="footer-container">
+          <div class="footer-section">
+            <h3>Наш офис</h3>
+            <div class="map-container">
+              <iframe
+                class="map-frame"
+                src="https://yandex.ru/map-widget/v1/?ll=86.083230%2C55.354230&z=17&l=map&pt=86.083230,55.354230,pm2rdm"
+                frameborder="0"
+                allowfullscreen
+                loading="lazy"
+                title="Карта офиса в Кемерово"
+              >
+              </iframe>
+            </div>
+            <p class="location-name">Кемерово</p>
+            <p class="location-address">
+              г. Кемерово, ул. 1-я Стахановская, дом 35, офис 301
+            </p>
+          </div>
+          <div class="footer-section">
+            <h3>Наш склад</h3>
+            <div class="map-container">
+              <iframe
+                class="map-frame"
+                src="https://yandex.ru/map-widget/v1/?ll=87.123000%2C53.756000&z=17&l=map&pt=87.123000,53.756000,pm2rdm"
+                frameborder="0"
+                allowfullscreen
+                loading="lazy"
+                title="Карта склада в Новокузнецке"
+              >
+              </iframe>
+            </div>
+            <p class="location-name">Новокузнецк</p>
+            <p class="location-address">
+              654033, Кемеровская область, г. Новокузнецк, Шоссе Кузнецкое, 3/11
+            </p>
+          </div>
+
+          <!-- ✅ YANGILANGAN РЕКВИЗИТЫ: КПП -->
+          <div class="footer-section">
+            <h3>Реквизиты</h3>
+            <div class="requisites">
+              <p><strong>ООО "ТЕХНОПРОМ"</strong></p>
+              <p><strong>ИНН/КПП:</strong> 7017461443 / 421201001</p>
+              <p><strong>ОГРН:</strong> 1197031058927</p>
+              <p>
+                <strong>Юридический адрес:</strong> 199178, г. Санкт-Петербург,
+                линия 10-я В.О., дом 25/42 литера А, помещение 6-Н, офис 9-Б
+              </p>
+            </div>
+          </div>
+
+          <div class="footer-section">
+            <h3>Контакты</h3>
+            <div class="contact-details">
+              <div class="contact-item">
+                <i class="fas fa-envelope"></i
+                ><span>technoprom70@yandex.ru</span>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-phone"></i><span>+7 (995) 294-44-10</span>
+              </div>
+              <div class="contact-item">
+                <i class="fab fa-telegram"></i>
+                <a
+                  href="https://t.me/+79952944410"
+                  target="_blank"
+                  style="
+                    color: var(--steel-gray);
+                    text-decoration: none;
+                    transition: color 0.3s;
+                  "
+                  >Написать в Telegram</a
+                >
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-clock"></i><span>Пн-Пт: 9:00-18:00</span>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-user-tie"></i
+                ><span>Директор: zabelin_92@internet.ru</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copyright">
+          <p>
+            &copy; 2026 Общество с ограниченной ответственностью «ТЕХНОПРОМ».
+            Все права защищены.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile menu toggle
+      const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+      const navLinks = document.getElementById("navLinks");
+
+      mobileMenuBtn.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+        mobileMenuBtn.classList.toggle("active");
+        mobileMenuBtn.innerHTML = navLinks.classList.contains("active")
+          ? '<i class="fas fa-times"></i>'
+          : '<i class="fas fa-bars"></i>';
+        document.body.style.overflow = navLinks.classList.contains("active")
+          ? "hidden"
+          : "";
+      });
+
+      document.querySelectorAll(".nav-links a").forEach((link) => {
+        link.addEventListener("click", () => {
+          navLinks.classList.remove("active");
+          mobileMenuBtn.classList.remove("active");
+          mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+          document.body.style.overflow = "";
+        });
+      });
+
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute("href");
+          if (targetId === "#") return;
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 100,
+              behavior: "smooth",
+            });
+          }
+        });
+      });
+
+      const priceBtn = document.getElementById("priceBtn");
+      priceBtn.addEventListener("click", (event) => {
+        const rect = priceBtn.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        const ripple = document.createElement("span");
+        ripple.style.cssText = `position:absolute;border-radius:50%;background:rgba(255,255,255,0.7);transform:scale(0);animation:ripple 0.6s linear;width:100px;height:100px;top:${y - 50}px;left:${x - 50}px;pointer-events:none;`;
+        priceBtn.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 600);
+        setTimeout(() => {
+          alert(
+            "Прайс-лист будет доступен для скачивания после обновления контактной информации. Мы свяжемся с вами в ближайшее время.",
+          );
+        }, 600);
+      });
+
+      function reveal() {
+        const reveals = document.querySelectorAll(".reveal");
+        for (let i = 0; i < reveals.length; i++) {
+          const windowHeight = window.innerHeight;
+          const elementTop = reveals[i].getBoundingClientRect().top;
+          if (elementTop < windowHeight - 150) {
+            reveals[i].classList.add("active");
+            const progressBar = document.getElementById("experience-bar");
+            if (progressBar && !progressBar.classList.contains("animated")) {
+              progressBar.classList.add("animated");
+              setTimeout(() => {
+                progressBar.style.width = "100%";
+              }, 300);
+            }
+          }
+        }
+      }
+
+      function animateCounter() {
+        const counter = document.getElementById("years-counter");
+        if (counter && !counter.classList.contains("animated")) {
+          counter.classList.add("animated");
+          let count = 0;
+          const target = 6;
+          const updateCount = () => {
+            if (count < target) {
+              count += target / 100;
+              counter.innerText = Math.floor(count);
+              setTimeout(updateCount, 20);
+            } else {
+              counter.innerText = target;
+            }
+          };
+          updateCount();
+        }
+      }
+
+      window.addEventListener("load", () => {
+        document
+          .querySelectorAll(".slideInLeft, .slideInRight")
+          .forEach((el) => el.classList.add("animated"));
+        reveal();
+      });
+      window.addEventListener("scroll", reveal);
+
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+            animateCounter();
+          }
+        });
+      }, observerOptions);
+
+      document
+        .querySelectorAll(".product-card, .benefit-item")
+        .forEach((el) => {
+          el.style.opacity = "0";
+          el.style.transform = "translateY(20px)";
+          el.style.transition = "opacity 0.5s, transform 0.5s";
+          observer.observe(el);
+        });
+
+      // ✅ TUZATILGAN FORMA: Telegram API to'g'ri ishlaydi
+      document.addEventListener("DOMContentLoaded", function () {
+        const contactForm = document.getElementById("contactForm");
+        const successMessage = document.getElementById("successMessage");
+        const submitBtn = document.getElementById("submitBtn");
+        const submitBtnText = submitBtn.querySelector("span");
+        const submitBtnIcon = submitBtn.querySelector("i");
+
+        const botToken = "8531086708:AAFVgJWEj3Hz2PNW-46quXzqt7KUI0JRJQI";
+        const chatId = "7874501248";
+
+        const phoneInput = document.getElementById("phone");
+        if (phoneInput) {
+          phoneInput.addEventListener("input", function (e) {
+            let digits = e.target.value.replace(/\D/g, "");
+            if (digits.startsWith("7")) digits = digits.substring(1);
+            if (digits.startsWith("8")) digits = digits.substring(1);
+            let result = "+7";
+            if (digits.length > 0) result += " (" + digits.substring(0, 3);
+            if (digits.length >= 3) result += ") " + digits.substring(3, 6);
+            if (digits.length >= 6) result += "-" + digits.substring(6, 8);
+            if (digits.length >= 8) result += "-" + digits.substring(8, 10);
+            e.target.value = result;
+          });
+        }
+
+        function validateForm() {
+          let isValid = true;
+          const name = document.getElementById("name").value.trim();
+          const phone = document.getElementById("phone").value.trim();
+          const product = document.getElementById("product").value;
+
+          document.querySelectorAll(".error-message").forEach((el) => {
+            el.style.display = "none";
+          });
+
+          if (!name || name.length < 2) {
+            document.getElementById("name-error").style.display = "block";
+            isValid = false;
+          }
+
+          const phoneDigits = phone.replace(/\D/g, "");
+          if (phoneDigits.length < 11) {
+            document.getElementById("phone-error").style.display = "block";
+            isValid = false;
+          }
+
+          if (!product) {
+            document.getElementById("product-error").style.display = "block";
+            isValid = false;
+          }
+
+          return isValid;
+        }
+
+        function formatTelegramMessage(formData) {
+          const date = new Date().toLocaleString("ru-RU");
+          return (
+            "📩 НОВАЯ ЗАЯВКА С САЙТА ТЕХНОПРОМ\n\n" +
+            "📅 Дата: " +
+            date +
+            "\n" +
+            "👤 Имя: " +
+            formData.name +
+            "\n" +
+            "📞 Телефон: " +
+            formData.phone +
+            "\n" +
+            "🏭 Продукция: " +
+            formData.product +
+            "\n" +
+            "📝 Комментарий: " +
+            (formData.message || "Не указано") +
+            "\n\n" +
+            "🔗 Источник: technoprom.net"
+          );
+        }
+
+        async function sendToTelegram(formData) {
+          const message = formatTelegramMessage(formData);
+          const url =
+            "https://api.telegram.org/bot" + botToken + "/sendMessage";
+
+          const response = await fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              chat_id: chatId,
+              text: message,
+            }),
+          });
+
+          if (!response.ok) {
+            const err = await response.text();
+            throw new Error("Telegram error: " + err);
+          }
+
+          const data = await response.json();
+          if (!data.ok) throw new Error("Telegram API: " + data.description);
+          return true;
+        }
+
+        if (contactForm) {
+          contactForm.addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            if (!validateForm()) return;
+
+            const formData = {
+              name: document.getElementById("name").value.trim(),
+              phone: document.getElementById("phone").value.trim(),
+              product: document.getElementById("product").value,
+              message: document.getElementById("message").value.trim(),
+            };
+
+            submitBtn.disabled = true;
+            submitBtnText.textContent = "Отправка...";
+            submitBtnIcon.className = "fas fa-spinner fa-spin";
+
+            try {
+              await sendToTelegram(formData);
+
+              contactForm.style.display = "none";
+              successMessage.style.display = "flex";
+              contactForm.reset();
+
+              let seconds = 10;
+              const timerElement = document.querySelector(".timer");
+              const timerInterval = setInterval(() => {
+                timerElement.textContent =
+                  "Перенаправление через " + seconds + " сек...";
+                seconds--;
+                if (seconds < 0) {
+                  clearInterval(timerInterval);
+                  window.scrollTo({
+                    top:
+                      document.getElementById("contact-form").offsetTop - 100,
+                    behavior: "smooth",
+                  });
+                  setTimeout(() => {
+                    successMessage.style.display = "none";
+                    contactForm.style.display = "flex";
+                    timerElement.textContent = "Ожидайте звонка";
+                  }, 3000);
+                }
+              }, 1000);
+            } catch (error) {
+              console.error("Send error:", error);
+              alert(
+                "Произошла ошибка при отправке заявки. Пожалуйста, свяжитесь с нами напрямую по телефону +7 (995) 294-44-10 или в Telegram.",
+              );
+            } finally {
+              submitBtn.disabled = false;
+              submitBtnText.textContent = "Отправить заявку";
+              submitBtnIcon.className = "fas fa-paper-plane";
+            }
+          });
+        }
+
+        document
+          .querySelectorAll(".form-input, .form-select, .form-textarea")
+          .forEach((input) => {
+            input.addEventListener("input", function () {
+              const errorEl = document.getElementById(this.id + "-error");
+              if (errorEl) errorEl.style.display = "none";
+            });
+          });
+      });
+
+      window.addEventListener("resize", function () {
+        if (window.innerWidth > 850 && navLinks.classList.contains("active")) {
+          navLinks.classList.remove("active");
+          mobileMenuBtn.classList.remove("active");
+          mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+          document.body.style.overflow = "";
+        }
+      });
+
+      document.addEventListener("touchstart", function () {}, {
+        passive: true,
+      });
+    </script>
+  </body>
+</html>
