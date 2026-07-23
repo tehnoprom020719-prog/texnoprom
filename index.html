@@ -979,9 +979,19 @@
           flex-direction: column;
           gap: 15px;
           align-items: flex-start;
+          padding-right: 60px;
         }
         .contact-info {
-          display: none;
+          flex-direction: row;
+          flex-wrap: wrap;
+          gap: 10px 20px;
+          text-align: left;
+          width: 100%;
+          padding-top: 10px;
+          border-top: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .contact-info a {
+          font-size: 14px;
         }
         header {
           position: static;
@@ -1173,6 +1183,30 @@
         color: #555;
         background: #fff8f4;
         border-radius: 0 6px 6px 0;
+      }
+      .news-doc-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 6px;
+        padding: 10px 16px;
+        background: #fff8f4;
+        border: 1px solid var(--orange-light);
+        border-radius: 8px;
+        color: var(--orange-dark) !important;
+        font-weight: 600 !important;
+        font-size: 13px !important;
+        text-decoration: none !important;
+        transition: background 0.2s, border-color 0.2s;
+      }
+      .news-doc-link:hover {
+        background: var(--orange-light);
+        border-color: var(--orange-primary);
+        text-decoration: none !important;
+      }
+      .news-doc-link i {
+        font-size: 15px;
+        color: var(--orange-primary);
       }
       @media (max-width: 768px) {
         .news-grid { grid-template-columns: 1fr; }
@@ -1524,7 +1558,7 @@
               </ul>
               <p><!-- УТОЧНИТЬ ДАТУ --><strong>Сроки приёма заявок:</strong> с 28.05.2026 в 10:00 по 08.06.2026 в 14:00 (МСК).<!-- /УТОЧНИТЬ ДАТУ --> Заявки удовлетворяются в порядке поступления. Размещение может быть завершено досрочно при достижении максимального объёма.</p>
               <p>Принять участие в размещении можно через платформу «Токеон»: <!-- УТОЧНИТЬ ССЫЛКУ --><a href="https://tokeon.ru/vypuski/THPR1?utm_source=agent&utm_medium=THPR1&utm_campaign=referral&utm_term=6aca47c6-fc49-4903-8225-2a2a03fc5450" target="_blank">tokeon.ru/vypuski/THPR1</a><!-- /УТОЧНИТЬ ССЫЛКУ --></p>
-              <p><i class="fa-solid fa-file-pdf"></i> <a href="docs/Решение_Долговые_ЦФА_ТЕХНОПРОМ-1.pdf" target="_blank">Скачать Решение о выпуске ЦФА «ТЕХНОПРОМ-1» (PDF)</a></p>
+              <p><a class="news-doc-link" href="docs/Решение_Долговые_ЦФА_ТЕХНОПРОМ-1.pdf" target="_blank"><i class="fa-solid fa-file-pdf"></i> Решение о выпуске ЦФА «ТЕХНОПРОМ-1» (PDF)</a></p>
               <div class="news-quote">
                 «Выпуск ЦФА — ещё один шаг в диверсификации источников финансирования компании. Мы внимательно изучаем возможности рынка капитала и рассматриваем ЦФА как гибкий инструмент для привлечения ликвидности под наши инвестиционные проекты. Для нас это также первый опыт публичного размещения финансового инструмента, который открывает дополнительные возможности для дальнейшего развития взаимодействия с инвестиционным сообществом.»
                 <br><strong>— Юлия Агаларова, коммерческий директор ООО «Технопром»</strong>
@@ -1555,7 +1589,7 @@
               </ul>
               <p><strong>Сроки приёма заявок:</strong> с 20.07.2026 в 10:00 по 29.07.2026 в 14:00 (МСК). Заявки удовлетворяются в порядке поступления. Размещение может быть завершено досрочно при достижении максимального объёма.</p>
               <p>Принять участие в размещении можно через платформу «Токеон»: <a href="https://tokeon.ru/vypuski/THPR2?utm_source=agent&utm_medium=THPR2&utm_campaign=referral-1" target="_blank">tokeon.ru/vypuski/THPR2</a></p>
-              <p><i class="fa-solid fa-file-pdf"></i> <a href="docs/Решение_Долговые_ЦФА_ТЕХНОПРОМ-2.pdf" target="_blank">Скачать Решение о выпуске ЦФА «ТЕХНОПРОМ-2» (PDF)</a></p>
+              <p><a class="news-doc-link" href="docs/Решение_Долговые_ЦФА_ТЕХНОПРОМ-2.pdf" target="_blank"><i class="fa-solid fa-file-pdf"></i> Решение о выпуске ЦФА «ТЕХНОПРОМ-2» (PDF)</a></p>
             </div>
           </div>
 
