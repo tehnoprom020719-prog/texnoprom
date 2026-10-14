@@ -180,24 +180,27 @@
       .logo-placeholder {
         width: 60px;
         height: 60px;
-        border-radius: 8px;
+        border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         overflow: hidden;
-        transition: all 0.3s;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         flex-shrink: 0;
-        padding: 5px;
+        padding: 0;
+        background: transparent;
       }
-      .logo-placeholder img {
+      .logo-placeholder img,
+      .logo-placeholder svg {
         width: 100%;
         height: 100%;
         border-radius: 50%;
-        object-fit: contain;
+        object-fit: cover;
+        display: block;
       }
       .logo-placeholder:hover {
-        transform: scale(1.05);
-        box-shadow: 0 5px 15px rgba(255, 107, 0, 0.3);
+        transform: scale(1.06);
+        box-shadow: 0 4px 16px rgba(255, 107, 0, 0.45);
       }
       .company-name h1 {
         font-size: 24px;
@@ -1083,34 +1086,97 @@
         margin: 20px auto;
       }
 
-      /* News Section */
+      /* News Section - Carousel & Modal */
       .news {
         padding: 80px 0;
         background-color: #f9fafb;
       }
-      .news-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-        gap: 30px;
-        margin-top: 40px;
+      .news-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 35px;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+      .news-header .section-title {
+        margin-bottom: 0;
+        text-align: left;
+      }
+      .news-slider-nav {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .news-slider-btn {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 2px solid var(--orange-primary);
+        background: #ffffff;
+        color: var(--orange-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 15px;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      }
+      .news-slider-btn:hover:not(:disabled) {
+        background: var(--orange-primary);
+        color: #ffffff;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(255, 107, 0, 0.3);
+      }
+      .news-slider-btn:disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+        border-color: #cbd5e1;
+        color: #94a3b8;
+        transform: none;
+        box-shadow: none;
+      }
+      .news-slider-wrapper {
+        overflow: hidden;
+        padding: 10px 4px 20px;
+        position: relative;
+      }
+      .news-slider-track {
+        display: flex;
+        gap: 24px;
+        transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+        will-change: transform;
       }
       .news-card {
-        background: #fff;
-        border-radius: 12px;
-        box-shadow: 0 4px 18px rgba(0,0,0,0.07);
+        flex: 0 0 calc((100% - 48px) / 3);
+        min-width: 0;
+        background: #ffffff;
+        border-radius: 14px;
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+        border-top: 4px solid var(--orange-primary);
         display: flex;
         flex-direction: column;
-        border-top: 4px solid var(--orange-primary);
-        overflow: hidden;
-        transition: transform 0.3s, box-shadow 0.3s;
+        justify-content: space-between;
         cursor: pointer;
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        user-select: none;
+        overflow: hidden;
       }
       .news-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 30px rgba(0,0,0,0.14);
+        transform: translateY(-6px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(255, 107, 0, 0.12);
+      }
+      .news-card-inner {
+        padding: 26px 24px 22px;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: space-between;
       }
       .news-card-header {
-        padding: 24px 24px 20px;
+        display: flex;
+        flex-direction: column;
       }
       .news-date {
         font-size: 12px;
@@ -1118,98 +1184,266 @@
         color: var(--orange-primary);
         text-transform: uppercase;
         letter-spacing: 0.6px;
-        margin-bottom: 10px;
+        margin-bottom: 12px;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
       }
       .news-card h3 {
         font-size: 15px;
         font-weight: 700;
         color: var(--deep-blue);
         line-height: 1.45;
+        margin-bottom: 12px;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .news-card-preview {
+        font-size: 13.5px;
+        color: #64748b;
+        line-height: 1.6;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
         margin: 0;
       }
-      .news-card-toggle {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        padding: 0 24px 18px;
-        font-size: 13px;
-        font-weight: 600;
-        color: var(--orange-primary);
-        background: none;
-        border: none;
-        cursor: pointer;
-        font-family: inherit;
-        transition: color 0.2s;
+      .news-card-footer {
+        margin-top: 20px;
+        padding-top: 14px;
+        border-top: 1px solid #f1f5f9;
       }
-      .news-card-toggle:hover { color: var(--orange-dark); }
-      .news-card-toggle .toggle-icon {
-        display: inline-block;
-        transition: transform 0.3s;
-        font-style: normal;
-      }
-      .news-card-toggle.open .toggle-icon { transform: rotate(180deg); }
-      .news-card-body {
-        display: none;
-        padding: 0 24px 24px;
-        border-top: 1px solid var(--light-gray);
-      }
-      .news-card-body.open {
-        display: block;
-      }
-      .news-card-body p {
-        font-size: 14px;
-        color: #444;
-        line-height: 1.75;
-        margin-bottom: 12px;
-      }
-      .news-card-body p:last-child { margin-bottom: 0; }
-      .news-card-body ul {
-        margin: 10px 0 14px 18px;
-        font-size: 14px;
-        color: #444;
-        line-height: 1.75;
-      }
-      .news-card-body a {
-        color: var(--orange-primary);
-        font-weight: 600;
-        text-decoration: none;
-      }
-      .news-card-body a:hover { text-decoration: underline; color: var(--orange-dark); }
-      .news-card-body .news-quote {
-        border-left: 3px solid var(--orange-primary);
-        padding: 10px 16px;
-        margin: 14px 0;
-        font-style: italic;
-        color: #555;
-        background: #fff8f4;
-        border-radius: 0 6px 6px 0;
-      }
-      .news-doc-link {
+      .news-card-toggle-btn {
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        margin-top: 6px;
-        padding: 10px 16px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--orange-primary);
+        transition: color 0.2s ease, gap 0.2s ease;
+      }
+      .news-card:hover .news-card-toggle-btn {
+        color: var(--orange-dark);
+        gap: 12px;
+      }
+      .news-slider-pagination {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 25px;
+      }
+      .news-slider-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 5px;
+        background: #cbd5e1;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .news-slider-dot.active {
+        width: 28px;
+        background: var(--orange-primary);
+      }
+      @media (max-width: 992px) {
+        .news-card {
+          flex: 0 0 calc((100% - 24px) / 2);
+        }
+      }
+      @media (max-width: 640px) {
+        .news-card {
+          flex: 0 0 100%;
+        }
+        .news-header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .news-slider-nav {
+          align-self: flex-end;
+          margin-top: -15px;
+        }
+      }
+
+      /* News Modal Popup */
+      .news-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 100000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s;
+      }
+      .news-modal.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      .news-modal-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.65);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+      }
+      .news-modal-container {
+        position: relative;
+        background: #ffffff;
+        border-radius: 18px;
+        max-width: 820px;
+        width: 100%;
+        max-height: 86vh;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+        border-top: 5px solid var(--orange-primary);
+        transform: scale(0.94) translateY(20px);
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        overflow: hidden;
+        z-index: 2;
+      }
+      .news-modal.active .news-modal-container {
+        transform: scale(1) translateY(0);
+      }
+      .news-modal-close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        border: none;
+        background: #f1f5f9;
+        color: #475569;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        z-index: 3;
+      }
+      .news-modal-close:hover {
+        background: #e2e8f0;
+        color: var(--orange-primary);
+        transform: rotate(90deg);
+      }
+      .news-modal-header {
+        padding: 30px 32px 18px;
+        padding-right: 70px;
+        border-bottom: 1px solid var(--light-gray);
+      }
+      .news-modal-date {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--orange-primary);
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+      }
+      .news-modal-title {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--deep-blue);
+        line-height: 1.4;
+        margin: 0;
+      }
+      .news-modal-body {
+        padding: 26px 32px 34px;
+        overflow-y: auto;
+        font-size: 15px;
+        line-height: 1.8;
+        color: #374151;
+        scrollbar-width: thin;
+        scrollbar-color: #cbd5e1 #f1f5f9;
+      }
+      .news-modal-body::-webkit-scrollbar {
+        width: 6px;
+      }
+      .news-modal-body::-webkit-scrollbar-track {
+        background: #f1f5f9;
+        border-radius: 4px;
+      }
+      .news-modal-body::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 4px;
+      }
+      .news-modal-body::-webkit-scrollbar-thumb:hover {
+        background: var(--orange-primary);
+      }
+      .news-modal-body p {
+        margin-bottom: 14px;
+      }
+      .news-modal-body p:last-child {
+        margin-bottom: 0;
+      }
+      .news-modal-body ul {
+        margin: 12px 0 16px 22px;
+        line-height: 1.8;
+      }
+      .news-modal-body ul li {
+        margin-bottom: 6px;
+      }
+      .news-modal-body a {
+        color: var(--orange-primary);
+        font-weight: 600;
+        text-decoration: underline;
+      }
+      .news-modal-body a:hover {
+        color: var(--orange-dark);
+      }
+      .news-modal-body .news-quote {
+        border-left: 4px solid var(--orange-primary);
+        padding: 14px 20px;
+        margin: 18px 0;
+        font-style: italic;
+        color: #4b5563;
+        background: #fff8f4;
+        border-radius: 0 8px 8px 0;
+      }
+      .news-modal-body .news-doc-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 10px;
+        padding: 12px 20px;
         background: #fff8f4;
         border: 1px solid var(--orange-light);
         border-radius: 8px;
         color: var(--orange-dark) !important;
         font-weight: 600 !important;
-        font-size: 13px !important;
+        font-size: 14px !important;
         text-decoration: none !important;
-        transition: background 0.2s, border-color 0.2s;
+        transition: all 0.2s ease;
       }
-      .news-doc-link:hover {
+      .news-modal-body .news-doc-link:hover {
         background: var(--orange-light);
         border-color: var(--orange-primary);
-        text-decoration: none !important;
-      }
-      .news-doc-link i {
-        font-size: 15px;
-        color: var(--orange-primary);
+        transform: translateY(-2px);
       }
       @media (max-width: 768px) {
-        .news-grid { grid-template-columns: 1fr; }
+        .news-modal-container {
+          max-height: 90vh;
+          border-radius: 14px;
+        }
+        .news-modal-header {
+          padding: 22px 20px 14px;
+          padding-right: 55px;
+        }
+        .news-modal-title {
+          font-size: 17px;
+        }
+        .news-modal-body {
+          padding: 20px;
+          font-size: 14px;
+        }
       }
 
     </style>
@@ -1220,7 +1454,7 @@
       <div class="container header-container">
         <div class="logo">
           <div class="logo-placeholder pulse-hover">
-            <svg viewBox="0 0 198.43 198.43" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="width:100%;height:100%" xml:space="preserve" overflow="hidden"><g><rect x="0" y="0" width="198.43" height="198.43" fill="#B3B2B2"/><g><path d="M22.33 149.46C21.03 150.3 19.72 151.14 18.31 152.05 17.37 150.54 16.49 149.12 15.55 147.6 16.97 146.76 18.31 145.97 19.68 145.16 18.1 142.04 16.55 138.97 14.93 135.77 13.55 136.35 12.13 136.94 10.51 137.62 9.86 136.01 9.23 134.43 8.57 132.77 10.13 132.17 11.54 131.63 13.03 131.05 12.01 127.71 10.99 124.39 9.95 120.97 8.45 121.32 6.95 121.66 5.31 122.04 4.93 120.32 4.56 118.7 4.17 116.95 5.81 116.62 7.36 116.3 8.88 115.99 8.44 112.53 8.01 109.14 7.56 105.57 6.08 105.65 4.54 105.74 2.83 105.84 2.83 104.13 2.83 102.47 2.83 100.63 4.22 100.63 5.76 100.63 7.37 100.63 7.51 97.02 7.65 93.57 7.79 90.01 6.27 89.84 4.77 89.68 3.07 89.49 3.28 87.75 3.48 86.06 3.7 84.3 5.34 84.54 6.84 84.76 8.44 85 9.17 81.6 9.9 78.19 10.65 74.69 9.48 74.36 8.28 73.96 7.06 73.69 6.3 73.52 6.07 73.21 6.32 72.46 6.75 71.14 7.14 69.81 7.58 68.36 9.15 68.87 10.61 69.35 12.13 69.84 13.44 66.59 14.74 63.37 16.07 60.05 14.7 59.39 13.31 58.72 11.76 57.98 12.54 56.43 13.31 54.91 14.12 53.29 15.56 54.06 16.93 54.78 18.35 55.54 20.2 52.55 22.03 49.58 23.89 46.57 22.63 45.67 21.36 44.77 20 43.8 21.02 42.41 22.01 41.06 23.09 39.58 24.39 40.59 25.64 41.55 26.9 42.51 29.22 39.87 31.5 37.28 33.86 34.59 32.75 33.58 31.61 32.54 30.56 31.59 31.86 30.13 33 28.85 34.2 27.51 35.39 28.81 36.44 29.96 37.5 31.12 40.23 28.91 42.91 26.74 45.68 24.49 44.81 23.24 43.92 21.97 42.95 20.58 44.36 19.61 45.75 18.66 47.26 17.62 48.15 18.99 48.99 20.29 49.87 21.64 52.94 19.93 55.98 18.23 59.08 16.5 58.41 15.09 57.74 13.7 57.02 12.18 58.58 11.46 60.11 10.77 61.77 10 62.43 11.51 63.06 12.95 63.7 14.41 67.01 13.24 70.25 12.09 73.62 10.89 73.21 9.42 72.8 7.93 72.35 6.29 74.05 5.84 75.7 5.41 77.42 4.96 77.81 6.59 78.16 8.06 78.53 9.61 81.96 9.03 85.35 8.46 88.89 7.87 88.75 6.31 88.62 4.75 88.47 3.07 90.25 2.94 91.87 2.82 93.6 2.69 93.73 4.37 93.85 5.91 93.97 7.43 97.48 7.43 100.89 7.43 104.44 7.43 104.55 5.95 104.67 4.41 104.81 2.7 106.5 2.82 108.13 2.93 109.95 3.06 109.81 4.68 109.67 6.21 109.52 7.86 112.98 8.45 116.4 9.03 119.9 9.62 120.26 8.11 120.61 6.64 121.01 4.97 122.71 5.41 124.35 5.84 126.08 6.28 125.63 7.91 125.22 9.39 124.81 10.88 128.16 12.07 131.4 13.22 134.73 14.4 135.33 13 135.95 11.57 136.63 10 138.22 10.71 139.74 11.39 141.41 12.14 140.71 13.62 140.04 15.04 139.35 16.49 142.42 18.21 145.43 19.89 148.55 21.63 149.38 20.35 150.23 19.05 151.16 17.62 152.6 18.59 153.98 19.53 155.49 20.54 154.55 21.88 153.66 23.15 152.74 24.46 155.44 26.65 158.12 28.82 160.92 31.09 161.95 29.97 163.03 28.81 164.27 27.46 165.4 28.81 166.49 30.09 167.62 31.44 166.71 32.28 165.56 33.33 164.4 34.39 166.9 37.22 169.2 39.84 171.54 42.49 172.78 41.53 174.01 40.57 175.32 39.56 176.36 40.96 177.36 42.32 178.43 43.76 177.1 44.71 175.84 45.61 174.55 46.55 176.38 49.52 178.2 52.48 180.07 55.52 181.45 54.79 182.82 54.07 184.3 53.29 185.09 54.85 185.87 56.37 186.68 57.96 185.18 58.68 183.78 59.35 182.36 60.03 183.68 63.32 184.98 66.55 186.3 69.83 187.77 69.35 189.25 68.86 190.85 68.33 191.35 69.98 191.84 71.58 192.37 73.32 190.77 73.79 189.29 74.23 187.78 74.68 188.52 78.13 189.25 81.53 189.98 84.98 191.54 84.75 193.03 84.53 194.7 84.28 194.92 86.01 195.14 87.69 195.37 89.47 193.7 89.65 192.21 89.81 190.63 89.98 190.77 93.5 190.9 96.95 191.04 100.51 192.56 100.51 194.06 100.51 195.62 100.51 195.62 102.33 195.62 104.03 195.62 105.81 193.93 105.72 192.38 105.64 190.85 105.56 190.41 109.05 189.97 112.43 189.52 115.96 191.01 116.26 192.55 116.58 194.22 116.92 193.85 118.62 193.5 120.25 193.12 122.01 191.51 121.64 190.01 121.29 188.47 120.94 187.45 124.28 186.44 127.58 185.38 131.01 186.77 131.54 188.2 132.1 189.83 132.73 189.21 134.33 188.6 135.88 187.94 137.58 186.4 136.95 184.95 136.35 183.49 135.75 181.9 138.9 180.34 141.98 178.74 145.14 180.07 145.93 181.4 146.72 182.87 147.59 181.95 149.07 181.07 150.49 180.12 152.03 178.74 151.15 177.44 150.31 176.09 149.45 174.01 152.26 171.93 155.06 169.82 157.91 172.2 159.93 173.47 161 172.33 162.31 171.22 163.57 170.03 164.93 168.8 163.81 167.64 162.74 166.49 161.69 163.97 164.11 161.5 166.48 158.9 168.97 159.86 170.12 160.88 171.34 161.97 172.66 160.62 173.74 159.28 174.81 157.88 175.92 156.86 174.61 155.94 173.41 154.96 172.16 152.07 174.11 149.21 176.04 146.23 178.05 146.98 179.34 147.76 180.67 148.64 182.17 147.13 183.03 145.65 183.87 144.09 184.76 143.3 183.3 142.57 181.93 141.81 180.54 138.61 181.99 135.47 183.4 132.21 184.87 132.74 186.29 133.28 187.73 133.88 189.36 132.25 189.94 130.68 190.49 128.96 191.1 128.45 189.58 127.96 188.12 127.43 186.57 124.04 187.44 120.68 188.31 117.23 189.2 117.51 190.75 117.79 192.27 118.09 193.9 116.37 194.2 114.76 194.48 112.98 194.79 112.72 193.2 112.47 191.64 112.22 190.04 108.77 190.33 105.37 190.61 101.83 190.91 101.83 192.39 101.83 193.98 101.83 195.67 100.07 195.67 98.44 195.67 96.72 195.67 96.72 194.04 96.72 192.5 96.72 190.92 93.2 190.63 89.77 190.35 86.22 190.05 85.98 191.59 85.73 193.16 85.47 194.79 83.76 194.49 82.15 194.22 80.35 193.91 80.64 192.3 80.92 190.75 81.2 189.2 77.77 188.31 74.44 187.44 71.02 186.55 70.52 188.03 70.03 189.49 69.5 191.08 67.83 190.5 66.25 189.95 64.57 189.36 65.15 187.8 65.69 186.35 66.24 184.86 63.06 183.42 59.92 182.01 56.65 180.53 55.93 181.85 55.2 183.21 54.37 184.73 52.85 183.88 51.38 183.06 49.81 182.18 50.66 180.73 51.44 179.39 52.22 178.05 49.3 176.08 46.45 174.14 43.49 172.14 42.54 173.36 41.6 174.58 40.57 175.91 39.19 174.81 37.87 173.77 36.47 172.66 37.53 171.4 38.52 170.22 39.57 168.97 37.06 166.57 34.57 164.18 31.98 161.69 30.84 162.72 29.68 163.79 28.44 164.92 27.27 163.59 26.16 162.33 24.98 160.99 26.23 159.93 27.41 158.93 28.63 157.9 26.49 155.08 24.42 152.28 22.33 149.46Z" fill="#FFFFFF"/><g><circle cx="73.07" cy="122.31" r="11.47" fill="#474A51"/><circle cx="99.74" cy="122.31" r="11.47" fill="#474A51"/><circle cx="125.36" cy="122.31" r="11.47" fill="#474A51"/><circle cx="87.43" cy="98.83" r="11.47" fill="#474A51"/><circle cx="113.42" cy="98.5" r="11.47" fill="#474A51"/><circle cx="101.95" cy="76.12" r="11.47" fill="#474A51"/></g></g></g></svg>
+            <img src="images/new-logo.svg" alt="ТЕХНОПРОМ Логотип" />
           </div>
           <div class="company-name">
             <h1>ТЕХНОПРОМ</h1>
@@ -1241,8 +1475,7 @@
           <div class="requisite-item">
             <i class="fas fa-map-marker-alt"></i>
             <span
-              ><strong>Адрес:</strong> г. Кемерово, ул. 1-я Стахановская, дом
-              35, офис 301</span
+              ><strong>Адрес:</strong> 650021, Кемеровская область Кузбасс, г. о. Кемеровский, г. Кемерово, ул. 1-я Стахановская, стр. 35/1</span
             >
           </div>
         </div>
@@ -1466,137 +1699,281 @@
     <!-- News Section -->
     <section class="news" id="news">
       <div class="container">
-        <h2 class="section-title reveal">Новости</h2>
-        <div class="news-grid">
-
-          <!-- News 1 -->
-          <div class="news-card reveal" onclick="toggleNews(this)">
-            <div class="news-card-header">
-              <div class="news-date">01 июня 2025</div>
-              <h3>Решение о строительстве комплексного предприятия по разведению и выращиванию форели мощностью 6 400 тонн готовой продукции в год</h3>
-            </div>
-            <button class="news-card-toggle" onclick="event.stopPropagation(); toggleNews(this.closest('.news-card'))">
-              Читать полностью <i class="toggle-icon">&#9660;</i>
+        <div class="news-header reveal">
+          <h2 class="section-title">Новости</h2>
+          <div class="news-slider-nav">
+            <button class="news-slider-btn prev-btn" id="newsPrevBtn" aria-label="Предыдущие новости">
+              <i class="fa-solid fa-chevron-left"></i>
             </button>
-            <div class="news-card-body">
-              <p>В связи с постоянно растущим спросом в регионе и за его пределами на свежую рыбу и рыбопродукты ООО «Технопром» планирует строительство и запуск промышленного предприятия по разведению и выращиванию форели, в том числе по её переработке в готовый продукт для потребителей, с сопутствующей инфраструктурой, с целью достижения полного цикла производства общим объёмом 6 400 тонн рыбы в год.</p>
-              <p>Выращивание форели будет осуществляться по современной технологии «установка замкнутого водоснабжения» (УЗВ) — в специальных бассейнах, размещённых в закрытых отапливаемых помещениях, что позволит существенно ускорить процесс роста рыбы и сделать его круглогодичным. Данная технология имеет огромные преимущества перед садковым типом: контроль над процессом, независимость от климата, снижение рисков заболеваемости, экологичность и быстрый рост.</p>
-              <p>Проектом предусмотрено строительство следующих подразделений:</p>
-              <ul>
-                <li>цех по содержанию маточного стада рыбы (получение икры);</li>
-                <li>инкубатор (выращивание мальков из икры);</li>
-                <li>цех по выращиванию молоди форели до товарного размера;</li>
-                <li>комбикормовый завод по производству кормов для рыбы и КРС;</li>
-                <li>мясоперерабатывающий комплекс, холодильник, складские помещения;</li>
-                <li>собственная аналитическая лаборатория.</li>
-              </ul>
-              <p>Проект является уникальным и высокотехнологичным, не имеет аналогов ни в России, ни за её пределами. Производственные мощности Романовского рыбного комбината обеспечат выпуск 6 400 тонн готовой продукции с планируемой среднегодовой выручкой <strong>4,2 млрд рублей</strong>.</p>
-              <p>Помимо этого, дополнительную выручку обеспечит комбикормовый завод мощностью 72 000 тонн в год с планируемой выручкой от продажи на открытом рынке порядка <strong>1,5 млрд рублей</strong>.</p>
-              <p>Данный проект был разработан при поддержке научных сотрудников Российской академии наук (РАН) совместно с командой инновационного центра «Сколково». Рыбокомбинат планируется построить на базе ООО «Романовские угодья» в Топкинском муниципальном округе Кемеровской области на земельном участке площадью 23,2 га.</p>
-              <p>Основными покупателями рыбной продукции будут крупные торговые предприятия Кемеровской и Новосибирской областей, а также федеральные сети: «Ашан», Metro, «О'КЕЙ», X5 Retail Group, «Магнит», «ВкусВилл». По мере развития рынок сбыта будет расширен на Китай и страны СНГ.</p>
-            </div>
+            <button class="news-slider-btn next-btn" id="newsNextBtn" aria-label="Следующие новости">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
           </div>
+        </div>
 
-          <!-- News 2 -->
-          <div class="news-card reveal" onclick="toggleNews(this)">
-            <div class="news-card-header">
-              <div class="news-date">25 декабря 2025</div>
-              <h3>О подписании соглашения с Правительством Кемеровской области</h3>
-            </div>
-            <button class="news-card-toggle" onclick="event.stopPropagation(); toggleNews(this.closest('.news-card'))">
-              Читать полностью <i class="toggle-icon">&#9660;</i>
-            </button>
-            <div class="news-card-body">
-              <p>Проект по «Организации промышленного производства по выращиванию и дальнейшей переработке форели в Кемерово» одобрен правительством.</p>
-              <p>23 декабря 2025 г. заключено Соглашение № 1231-16 об инвестиционной деятельности между Кемеровской областью — Кузбассом и ООО «Технопром», направленное на реализацию инвестиционного проекта «Организация промышленного производства по выращиванию и дальнейшей переработке форели в Кемеровской области».</p>
-              <p>22 декабря 2025 г. вышло официальное распоряжение о включении проекта в перечень приоритетных: <a href="https://bulleten-kuzbass.ru/bulletin/330125" target="_blank">bulleten-kuzbass.ru/bulletin/330125</a></p>
-            </div>
-          </div>
+        <div class="news-slider-wrapper">
+          <div class="news-slider-track" id="newsTrack">
 
-          <!-- News 3 -->
-          <div class="news-card reveal" onclick="toggleNews(this)">
-            <div class="news-card-header">
-              <div class="news-date">01 апреля 2026</div>
-              <h3>ООО «Технопром» объявляет финансовые результаты за 2025 год согласно официальной аудированной отчётности</h3>
-            </div>
-            <button class="news-card-toggle" onclick="event.stopPropagation(); toggleNews(this.closest('.news-card'))">
-              Читать полностью <i class="toggle-icon">&#9660;</i>
-            </button>
-            <div class="news-card-body">
-              <ul>
-                <li>Годовая выручка по итогам 2025 года составила <strong>2,2 млрд рублей</strong> — прирост на 29% к 2024 г.</li>
-                <li>Чистая прибыль выросла в 10 раз и составила <strong>192 млн рублей</strong>.</li>
-                <li>Капитал компании составил <strong>250 млн рублей</strong> — прирост на 309% к 2024 г.</li>
-                <li>EBITDA увеличилась на 955% и составила <strong>256 млн рублей</strong>.</li>
-                <li>Прогнозная выручка по итогам 2026 года составит <strong>4,2 млрд рублей</strong>.</li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- News 4 -->
-          <div class="news-card reveal" onclick="toggleNews(this)">
-            <div class="news-card-header">
-              <!-- УТОЧНИТЬ ДАТУ -->
-              <div class="news-date">28 мая 2026</div>
-              <!-- /УТОЧНИТЬ ДАТУ -->
-              <h3>ООО «Технопром» объявляет о размещении дебютного выпуска ЦФА</h3>
-            </div>
-            <button class="news-card-toggle" onclick="event.stopPropagation(); toggleNews(this.closest('.news-card'))">
-              Читать полностью <i class="toggle-icon">&#9660;</i>
-            </button>
-            <div class="news-card-body">
-              <p>ООО «Технопром» — оптовый поставщик для горнодобывающей отрасли — объявляет о старте размещения дебютного выпуска долговых цифровых финансовых активов (ЦФА) на платформе ООО «Токены» («Токеон»).</p>
-              <p>Выпуск ЦФА станет первым публичным размещением финансового инструмента компании и ещё одним шагом в развитии работы с рынком капитала. Привлечённые средства планируется направить на строительство собственного логистического центра.</p>
-              <p><strong>Ключевые параметры:</strong></p>
-              <ul>
-                <li>Объём выпуска: <strong>30 млн рублей</strong> (30 000 ЦФА).</li>
-                <li>Номинал и цена: <strong>1 000 ₽</strong> за 1 ЦФА.</li>
-                <li>Ставка: <strong>23% годовых</strong>, выплата ежемесячная.</li>
-                <li>Погашение: <strong>07 декабря 2026 года</strong> (срок обращения ~6 месяцев).</li>
-                <li>Обеспечение: не предусмотрено.</li>
-                <li>Тикер на платформе «Токеон»: <strong>THPR1</strong>.</li>
-              </ul>
-              <p><!-- УТОЧНИТЬ ДАТУ --><strong>Сроки приёма заявок:</strong> с 28.05.2026 в 10:00 по 08.06.2026 в 14:00 (МСК).<!-- /УТОЧНИТЬ ДАТУ --> Заявки удовлетворяются в порядке поступления. Размещение может быть завершено досрочно при достижении максимального объёма.</p>
-              <p>Принять участие в размещении можно через платформу «Токеон»: <!-- УТОЧНИТЬ ССЫЛКУ --><a href="https://tokeon.ru/vypuski/THPR1?utm_source=agent&utm_medium=THPR1&utm_campaign=referral&utm_term=6aca47c6-fc49-4903-8225-2a2a03fc5450" target="_blank">tokeon.ru/vypuski/THPR1</a><!-- /УТОЧНИТЬ ССЫЛКУ --></p>
-              <p><a class="news-doc-link" href="docs/Решение_Долговые_ЦФА_ТЕХНОПРОМ-1.pdf" target="_blank"><i class="fa-solid fa-file-pdf"></i> Решение о выпуске ЦФА «ТЕХНОПРОМ-1» (PDF)</a></p>
-              <div class="news-quote">
-                «Выпуск ЦФА — ещё один шаг в диверсификации источников финансирования компании. Мы внимательно изучаем возможности рынка капитала и рассматриваем ЦФА как гибкий инструмент для привлечения ликвидности под наши инвестиционные проекты. Для нас это также первый опыт публичного размещения финансового инструмента, который открывает дополнительные возможности для дальнейшего развития взаимодействия с инвестиционным сообществом.»
-                <br><strong>— Юлия Агаларова, коммерческий директор ООО «Технопром»</strong>
+            <!-- News 1 (Newest: 15 октября 2026) -->
+            <div class="news-card reveal" onclick="openNewsModal(this)">
+              <div class="news-card-inner">
+                <div class="news-card-header">
+                  <div class="news-date">
+                    <i class="fa-regular fa-calendar-alt"></i> 15 октября 2026
+                  </div>
+                  <h3>Технопром: купон 24% Новый выпуск ЦФА на 50 млн ₽ на Токеон</h3>
+                  <p class="news-card-preview">
+                    Новый выпуск ЦФА объемом 50 млн ₽ на инвестиционной платформе «Токеон»: ставка 24% годовых, ежемесячные выплаты купона и срок обращения 12 месяцев.
+                  </p>
+                </div>
+                <div class="news-card-footer">
+                  <span class="news-card-toggle-btn">
+                    Читать полностью <i class="fa-solid fa-arrow-right"></i>
+                  </span>
+                </div>
               </div>
-              <p>Контакты: <strong>8 995 294-44-10</strong>, <a href="mailto:yulya.agalarova@bk.ru">yulya.agalarova@bk.ru</a></p>
+              <div class="news-card-body" style="display: none;">
+                <p><strong>Сведения об эмитенте</strong></p>
+                <p>ООО «Технопром» – поставщик продукции для предприятий горнодобывающей, металлургической и других отраслей. Компания специализируется на реализации стальных мелющих шаров различных диаметров, железнодорожных рельсов и материалов верхнего строения пути. Основные операционные площадки для приемки и хранения расположены в Кузбассе, а доставка продукции осуществляется по всей России. ООО «Технопром» сотрудничает с крупными промышленными заказчиками и последовательно расширяет собственную логистическую инфраструктуру.</p>
+                <p>Финансовые показатели компании демонстрируют устойчивый рост. По итогам 2025 года выручка составила 2,2 млрд рублей (+29% к предыдущему году), а чистая прибыль достигла 192 млн рублей. За девять месяцев 2026 года выручка выросла до 3,8 млрд рублей, чистая прибыль – до 507 млн рублей, EBITDA – до 683 млн рублей. Согласно прогнозу, к концу 2026 года выручка может достигнуть 5 млрд рублей, а чистая прибыль – порядка 620 млн рублей.</p>
+                <p>Помимо торговли металлопрокатом, ООО «Технопром» реализует крупный инвестпроект стоимостью около 10 млрд рублей, включенный в реестр региональных инвестиционных проектов (РИП) Кемеровской области. Средства от выпуска ЦФА планируется направить на развитие логистической инфраструктуры основного бизнеса – строительство собственного складского комплекса, который позволит увеличить объемы поставок и снизить зависимость от сторонних подрядчиков.</p>
+                <p><strong>Параметры выпуска:</strong></p>
+                <ul>
+                  <li>Объем выпуска: <strong>50 000 000 ₽</strong>.</li>
+                  <li>Ставка: <strong>24% годовых</strong>.</li>
+                  <li>Выплаты: <strong>ежемесячно</strong>.</li>
+                  <li>Срок обращения: <strong>12 месяцев</strong>.</li>
+                  <li>Мин. сумма участия: <strong>1 000 ₽</strong>.</li>
+                  <li>Срок погашения: <strong>22 октября 2027 г.</strong></li>
+                  <li>Дата начала сбора: <strong>15 октября 2026 г.</strong> в 10:00 (МСК).</li>
+                  <li>Дата окончания сбора: <strong>23 октября 2026 г.</strong> в 14:00 (МСК).</li>
+                  <li>Тикер на платформе «Токеон»: <strong>THPR3</strong>.</li>
+                </ul>
+                <p>Принять участие можно по ссылке: <a href="https://tokeon.ru/vypuski/THPR3" target="_blank" id="cfa3-tokeon-link">tokeon.ru/vypuski/THPR3</a></p>
+                <p><a class="news-doc-link" href="docs/Решение_Долговые_ЦФА_ТЕХНОПРОМ-3.pdf" target="_blank"><i class="fa-solid fa-file-pdf"></i> Решение о выпуске ЦФА «ТЕХНОПРОМ-3» (PDF)</a></p>
+              </div>
             </div>
-          </div>
-           <!-- News 5 -->
-          <div class="news-card reveal" onclick="toggleNews(this)">
-            <div class="news-card-header">
-              <div class="news-date">16 июля 2026</div>
-              <h3>ООО «Технопром» объявляет о старте размещения второго выпуска ЦФА</h3>
-            </div>
-            <button class="news-card-toggle" onclick="event.stopPropagation(); toggleNews(this.closest('.news-card'))">
-              Читать полностью <i class="toggle-icon">&#9660;</i>
-            </button>
-            <div class="news-card-body">
-              <p>ООО «Технопром» — оптовый поставщик для горнодобывающей отрасли — объявляет о старте размещения выпуска долговых цифровых финансовых активов (ЦФА) на платформе ООО «Токены» («Токеон»).</p>
-              <p>Выпуск ЦФА станет уже вторым размещением финансового инструмента компании на данной платформе и следующим шагом в развитии работы с рынком капитала. Компания уже выплачивает купонный доход по дебютному выпуску, который состоялся в мае текущего года. Привлечённые средства планируется направить на строительство собственного логистического центра.</p>
-              <p><strong>Ключевые параметры:</strong></p>
-              <ul>
-                <li>Объём выпуска: <strong>50 млн рублей</strong> (50 000 ЦФА).</li>
-                <li>Номинал и цена: <strong>1 000 ₽</strong> за 1 ЦФА.</li>
-                <li>Ставка: <strong>23% годовых</strong>, выплата ежемесячная.</li>
-                <li>Погашение: <strong>26 апреля 2027 г.</strong> (срок обращения ~9 месяцев).</li>
-                <li>Обеспечение: не предусмотрено.</li>
-                <li>Тикер на платформе «Токеон»: <strong>THPR2</strong>.</li>
-              </ul>
-              <p><strong>Сроки приёма заявок:</strong> с 20.07.2026 в 10:00 по 29.07.2026 в 14:00 (МСК). Заявки удовлетворяются в порядке поступления. Размещение может быть завершено досрочно при достижении максимального объёма.</p>
-              <p>Принять участие в размещении можно через платформу «Токеон»: <a href="https://tokeon.ru/vypuski/THPR2?utm_source=agent&utm_medium=THPR2&utm_campaign=referral-1" target="_blank">tokeon.ru/vypuski/THPR2</a></p>
-              <p><a class="news-doc-link" href="docs/Решение_Долговые_ЦФА_ТЕХНОПРОМ-2.pdf" target="_blank"><i class="fa-solid fa-file-pdf"></i> Решение о выпуске ЦФА «ТЕХНОПРОМ-2» (PDF)</a></p>
-            </div>
-          </div>
 
+            <!-- News 2 (12 октября 2026) -->
+            <div class="news-card reveal" onclick="openNewsModal(this)">
+              <div class="news-card-inner">
+                <div class="news-card-header">
+                  <div class="news-date">
+                    <i class="fa-regular fa-calendar-alt"></i> 12 октября 2026
+                  </div>
+                  <h3>ООО «Технопром» публикует результаты отчетности за 9 месяцев 2026 года</h3>
+                  <p class="news-card-preview">
+                    Выручка достигла 3,8 млрд руб., чистая прибыль составила 506 млн руб., чистые активы выросли до 757 млн руб., а показатель EBITDA составил 683 млн руб.
+                  </p>
+                </div>
+                <div class="news-card-footer">
+                  <span class="news-card-toggle-btn">
+                    Читать полностью <i class="fa-solid fa-arrow-right"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="news-card-body" style="display: none;">
+                <p>ООО «Технопром» публикует результаты бухгалтерской отчетности за 9 месяцев 2026 года. Компания демонстрирует высокую динамику роста ключевых финансовых показателей:</p>
+                <ul>
+                  <li>Выручка компании составила <strong>3,8 млрд руб.</strong></li>
+                  <li>Чистая прибыль достигла <strong>506 млн руб.</strong></li>
+                  <li>Чистые активы компании составили <strong>757 млн руб.</strong></li>
+                  <li>EBITDA — <strong>683 млн руб.</strong></li>
+                </ul>
+                <p>Ознакомиться с отчетностью Вы можете по ссылке: <a href="docs/Бухгалтерская_отчетность_9_месяцев_2026.pdf" target="_blank" id="news6-report-link">Бухгалтерская отчётность за 9 месяцев 2026 года</a></p>
+                <p><a class="news-doc-link" href="docs/Бухгалтерская_отчетность_9_месяцев_2026.pdf" target="_blank"><i class="fa-solid fa-file-pdf"></i> Бухгалтерская отчетность за 9 месяцев 2026 г. (PDF)</a></p>
+              </div>
+            </div>
+
+            <!-- News 3 (16 июля 2026) -->
+            <div class="news-card reveal" onclick="openNewsModal(this)">
+              <div class="news-card-inner">
+                <div class="news-card-header">
+                  <div class="news-date">
+                    <i class="fa-regular fa-calendar-alt"></i> 16 июля 2026
+                  </div>
+                  <h3>ООО «Технопром» объявляет о старте размещения второго выпуска ЦФА</h3>
+                  <p class="news-card-preview">
+                    Второй выпуск цифровых финансовых активов (ЦФА) на платформе «Токеон» на сумму 50 млн рублей со ставкой 23% годовых и ежемесячной выплатой купона.
+                  </p>
+                </div>
+                <div class="news-card-footer">
+                  <span class="news-card-toggle-btn">
+                    Читать полностью <i class="fa-solid fa-arrow-right"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="news-card-body" style="display: none;">
+                <p>ООО «Технопром» — оптовый поставщик для горнодобывающей отрасли — объявляет о старте размещения выпуска долговых цифровых финансовых активов (ЦФА) на платформе ООО «Токены» («Токеон»).</p>
+                <p>Выпуск ЦФА станет уже вторым размещением финансового инструмента компании на данной платформе и следующим шагом в развитии работы с рынком капитала. Компания уже выплачивает купонный доход по дебютному выпуску, который состоялся в мае текущего года. Привлечённые средства планируется направить на строительство собственного логистического центра.</p>
+                <p><strong>Ключевые параметры:</strong></p>
+                <ul>
+                  <li>Объём выпуска: <strong>50 млн рублей</strong> (50 000 ЦФА).</li>
+                  <li>Номинал и цена: <strong>1 000 ₽</strong> за 1 ЦФА.</li>
+                  <li>Ставка: <strong>23% годовых</strong>, выплата ежемесячная.</li>
+                  <li>Погашение: <strong>26 апреля 2027 г.</strong> (срок обращения ~9 месяцев).</li>
+                  <li>Обеспечение: не предусмотрено.</li>
+                  <li>Тикер на платформе «Токеон»: <strong>THPR2</strong>.</li>
+                </ul>
+                <p><strong>Сроки приёма заявок:</strong> с 20.07.2026 в 10:00 по 29.07.2026 в 14:00 (МСК). Заявки удовлетворяются в порядке поступления. Размещение может быть завершено досрочно при достижении максимального объёма.</p>
+                <p>Принять участие в размещении можно через платформу «Токеон»: <a href="https://tokeon.ru/vypuski/THPR2?utm_source=agent&utm_medium=THPR2&utm_campaign=referral-1" target="_blank">tokeon.ru/vypuski/THPR2</a></p>
+                <p><a class="news-doc-link" href="docs/Решение_Долговые_ЦФА_ТЕХНОПРОМ-2.pdf" target="_blank"><i class="fa-solid fa-file-pdf"></i> Решение о выпуске ЦФА «ТЕХНОПРОМ-2» (PDF)</a></p>
+              </div>
+            </div>
+
+            <!-- News 4 (28 мая 2026) -->
+            <div class="news-card reveal" onclick="openNewsModal(this)">
+              <div class="news-card-inner">
+                <div class="news-card-header">
+                  <div class="news-date">
+                    <i class="fa-regular fa-calendar-alt"></i> 28 мая 2026
+                  </div>
+                  <h3>ООО «Технопром» объявляет о размещении дебютного выпуска ЦФА</h3>
+                  <p class="news-card-preview">
+                    Старт размещения первого выпуска долговых цифровых финансовых активов (ЦФА) на платформе «Токеон» объемом 30 млн рублей со ставкой 23% годовых.
+                  </p>
+                </div>
+                <div class="news-card-footer">
+                  <span class="news-card-toggle-btn">
+                    Читать полностью <i class="fa-solid fa-arrow-right"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="news-card-body" style="display: none;">
+                <p>ООО «Технопром» — оптовый поставщик для горнодобывающей отрасли — объявляет о старте размещения дебютного выпуска долговых цифровых финансовых активов (ЦФА) на платформе ООО «Токены» («Токеон»).</p>
+                <p>Выпуск ЦФА станет первым публичным размещением финансового инструмента компании и ещё одним шагом в развитии работы с рынком капитала. Привлечённые средства планируется направить на строительство собственного логистического центра.</p>
+                <p><strong>Ключевые параметры:</strong></p>
+                <ul>
+                  <li>Объём выпуска: <strong>30 млн рублей</strong> (30 000 ЦФА).</li>
+                  <li>Номинал и цена: <strong>1 000 ₽</strong> за 1 ЦФА.</li>
+                  <li>Ставка: <strong>23% годовых</strong>, выплата ежемесячная.</li>
+                  <li>Погашение: <strong>07 декабря 2026 года</strong> (срок обращения ~6 месяцев).</li>
+                  <li>Обеспечение: не предусмотрено.</li>
+                  <li>Тикер на платформе «Токеон»: <strong>THPR1</strong>.</li>
+                </ul>
+                <p><strong>Сроки приёма заявок:</strong> с 28.05.2026 в 10:00 по 08.06.2026 в 14:00 (МСК). Заявки удовлетворяются в порядке поступления. Размещение может быть завершено досрочно при достижении максимального объёма.</p>
+                <p>Принять участие в размещении можно через платформу «Токеон»: <a href="https://tokeon.ru/vypuski/THPR1?utm_source=agent&utm_medium=THPR1&utm_campaign=referral&utm_term=6aca47c6-fc49-4903-8225-2a2a03fc5450" target="_blank">tokeon.ru/vypuski/THPR1</a></p>
+                <p><a class="news-doc-link" href="docs/Решение_Долговые_ЦФА_ТЕХНОПРОМ-1.pdf" target="_blank"><i class="fa-solid fa-file-pdf"></i> Решение о выпуске ЦФА «ТЕХНОПРОМ-1» (PDF)</a></p>
+                <div class="news-quote">
+                  «Выпуск ЦФА — ещё один шаг в диверсификации источников финансирования компании. Мы внимательно изучаем возможности рынка капитала и рассматриваем ЦФА как гибкий инструмент для привлечения ликвидности под наши инвестиционные проекты. Для нас это также первый опыт публичного размещения финансового инструмента, который открывает дополнительные возможности для дальнейшего развития взаимодействия с инвестиционным сообществом.»
+                  <br><strong>— Юлия Агаларова, коммерческий директор ООО «Технопром»</strong>
+                </div>
+                <p>Контакты: <strong>8 995 294-44-10</strong>, <a href="mailto:yulya.agalarova@bk.ru">yulya.agalarova@bk.ru</a></p>
+              </div>
+            </div>
+
+            <!-- News 5 (01 апреля 2026) -->
+            <div class="news-card reveal" onclick="openNewsModal(this)">
+              <div class="news-card-inner">
+                <div class="news-card-header">
+                  <div class="news-date">
+                    <i class="fa-regular fa-calendar-alt"></i> 01 апреля 2026
+                  </div>
+                  <h3>ООО «Технопром» объявляет финансовые результаты за 2025 год согласно официальной аудированной отчётности</h3>
+                  <p class="news-card-preview">
+                    Выручка составила 2,2 млрд рублей (+29%), чистая прибыль выросла в 10 раз до 192 млн рублей, EBITDA увеличилась на 955% и достигла 256 млн рублей.
+                  </p>
+                </div>
+                <div class="news-card-footer">
+                  <span class="news-card-toggle-btn">
+                    Читать полностью <i class="fa-solid fa-arrow-right"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="news-card-body" style="display: none;">
+                <ul>
+                  <li>Годовая выручка по итогам 2025 года составила <strong>2,2 млрд рублей</strong> — прирост на 29% к 2024 г.</li>
+                  <li>Чистая прибыль выросла в 10 раз и составила <strong>192 млн рублей</strong>.</li>
+                  <li>Капитал компании составил <strong>250 млн рублей</strong> — прирост на 309% к 2024 г.</li>
+                  <li>EBITDA увеличилась на 955% и составила <strong>256 млн рублей</strong>.</li>
+                  <li>Прогнозная выручка по итогам 2026 года составит <strong>4,2 млрд рублей</strong>.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- News 6 (25 декабря 2025) -->
+            <div class="news-card reveal" onclick="openNewsModal(this)">
+              <div class="news-card-inner">
+                <div class="news-card-header">
+                  <div class="news-date">
+                    <i class="fa-regular fa-calendar-alt"></i> 25 декабря 2025
+                  </div>
+                  <h3>О подписании соглашения с Правительством Кемеровской области</h3>
+                  <p class="news-card-preview">
+                    Проект по «Организации промышленного производства по выращиванию и дальнейшей переработке форели в Кемерово» одобрен правительством Кемеровской области и включен в перечень приоритетных.
+                  </p>
+                </div>
+                <div class="news-card-footer">
+                  <span class="news-card-toggle-btn">
+                    Читать полностью <i class="fa-solid fa-arrow-right"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="news-card-body" style="display: none;">
+                <p>Проект по «Организации промышленного производства по выращиванию и дальнейшей переработке форели в Кемерово» одобрен правительством.</p>
+                <p>23 декабря 2025 г. заключено Соглашение № 1231-16 об инвестиционной деятельности между Кемеровской областью — Кузбассом и ООО «Технопром», направленное на реализацию инвестиционного проекта «Организация промышленного производства по выращиванию и дальнейшей переработке форели в Кемеровской области».</p>
+                <p>22 декабря 2025 г. вышло официальное распоряжение о включении проекта в перечень приоритетных: <a href="https://bulleten-kuzbass.ru/bulletin/330125" target="_blank">bulleten-kuzbass.ru/bulletin/330125</a></p>
+              </div>
+            </div>
+
+            <!-- News 7 (01 июня 2025) -->
+            <div class="news-card reveal" onclick="openNewsModal(this)">
+              <div class="news-card-inner">
+                <div class="news-card-header">
+                  <div class="news-date">
+                    <i class="fa-regular fa-calendar-alt"></i> 01 июня 2025
+                  </div>
+                  <h3>Решение о строительстве комплексного предприятия по разведению и выращиванию форели мощностью 6 400 тонн готовой продукции в год</h3>
+                  <p class="news-card-preview">
+                    В связи с постоянно растущим спросом на свежую рыбу и рыбопродукты ООО «Технопром» планирует строительство предприятия полного цикла мощностью 6 400 тонн рыбы в год по технологии УЗВ.
+                  </p>
+                </div>
+                <div class="news-card-footer">
+                  <span class="news-card-toggle-btn">
+                    Читать полностью <i class="fa-solid fa-arrow-right"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="news-card-body" style="display: none;">
+                <p>В связи с постоянно растущим спросом в регионе и за его пределами на свежую рыбу и рыбопродукты ООО «Технопром» планирует строительство и запуск промышленного предприятия по разведению и выращиванию форели, в том числе по её переработке в готовый продукт для потребителей, с сопутствующей инфраструктурой, с целью достижения полного цикла производства общим объёмом 6 400 тонн рыбы в год.</p>
+                <p>Выращивание форели будет осуществляться по современной технологии «установка замкнутого водоснабжения» (УЗВ) — в специальных бассейнах, размещённых в закрытых отапливаемых помещениях, что позволит существенно ускорить процесс роста рыбы и сделать его круглогодичным. Данная технология имеет огромные преимущества перед садковым типом: контроль над процессом, независимость от климата, снижение рисков заболеваемости, экологичность и быстрый рост.</p>
+                <p>Проектом предусмотрено строительство следующих подразделений:</p>
+                <ul>
+                  <li>цех по содержанию маточного стада рыбы (получение икры);</li>
+                  <li>инкубатор (выращивание мальков из икры);</li>
+                  <li>цех по выращиванию молоди форели до товарного размера;</li>
+                  <li>комбикормовый завод по производству кормов для рыбы и КРС;</li>
+                  <li>мясоперерабатывающий комплекс, холодильник, складские помещения;</li>
+                  <li>собственная аналитическая лаборатория.</li>
+                </ul>
+                <p>Проект является уникальным и высокотехнологичным, не имеет аналогов ни в России, ни за её пределами. Производственные мощности Романовского рыбного комбината обеспечат выпуск 6 400 тонн готовой продукции с планируемой среднегодовой выручкой <strong>4,2 млрд рублей</strong>.</p>
+                <p>Помимо этого, дополнительную выручку обеспечит комбикормовый завод мощностью 72 000 тонн в год с планируемой выручкой от продажи на открытом рынке порядка <strong>1,5 млрд рублей</strong>.</p>
+                <p>Данный проект был разработан при поддержке научных сотрудников Российской академии наук (РАН) совместно с командой инновационного центра «Сколково». Рыбокомбинат планируется построить на базе ООО «Романовские угодья» в Топкинском муниципальном округе Кемеровской области на земельном участке площадью 23,2 га.</p>
+                <p>Основными покупателями рыбной продукции будут крупные торговые предприятия Кемеровской и Новосибирской областей, а также федеральные сети: «Ашан», Metro, «О'КЕЙ», X5 Retail Group, «Магнит», «ВкусВилл». По мере развития рынок сбыта будет расширен на Китай и страны СНГ.</p>
+              </div>
+            </div>
+
+          </div>
         </div>
-        </div>
+
+        <div class="news-slider-pagination" id="newsPagination"></div>
       </div>
     </section>
+
+    <!-- News Modal -->
+    <div class="news-modal" id="newsModal" role="dialog" aria-modal="true" aria-hidden="true" onclick="handleModalBackdrop(event)">
+      <div class="news-modal-overlay"></div>
+      <div class="news-modal-container">
+        <button class="news-modal-close" onclick="closeNewsModal()" aria-label="Закрыть">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="news-modal-header">
+          <div class="news-modal-date" id="modalNewsDate"></div>
+          <h3 class="news-modal-title" id="modalNewsTitle"></h3>
+        </div>
+        <div class="news-modal-body" id="modalNewsBody"></div>
+      </div>
+    </div>
 
     <!-- Contact Form Section -->
     <section class="contact-form-section" id="contact-form">
@@ -1730,7 +2107,7 @@
             </div>
             <p class="location-name">Кемерово</p>
             <p class="location-address">
-              г. Кемерово, ул. 1-я Стахановская, дом 35, офис 301
+              650021, Кемеровская область Кузбасс, г. о. Кемеровский, г. Кемерово, ул. 1-я Стахановская, стр. 35/1
             </p>
           </div>
           <div class="footer-section">
@@ -1752,7 +2129,7 @@
             </p>
           </div>
 
-          <!-- ✅ YANGILANGAN РЕКВИЗИТЫ: КПП -->
+          <!-- ✅ YANGILANGAN РЕКВИЗИТЫ: Юридический адрес -->
           <div class="footer-section">
             <h3>Реквизиты</h3>
             <div class="requisites">
@@ -1760,8 +2137,7 @@
               <p><strong>ИНН/КПП:</strong> 7017461443 / 421201001</p>
               <p><strong>ОГРН:</strong> 1197031058927</p>
               <p>
-                <strong>Юридический адрес:</strong> 199178, г. Санкт-Петербург,
-                линия 10-я В.О., дом 25/42 литера А, помещение 6-Н, офис 9-Б
+                <strong>Юридический адрес:</strong> 650021, Кемеровская область Кузбасс, г. о. Кемеровский, г. Кемерово, ул. 1-я Стахановская, стр. 35/1
               </p>
             </div>
           </div>
@@ -2116,14 +2492,192 @@
     </script>
   
     <script>
-      function toggleNews(card) {
-        var body = card.querySelector('.news-card-body');
-        var btn = card.querySelector('.news-card-toggle');
-        var isOpen = body.classList.contains('open');
-        body.classList.toggle('open', !isOpen);
-        btn.classList.toggle('open', !isOpen);
-        btn.childNodes[0].textContent = isOpen ? 'Читать полностью ' : 'Свернуть ';
+      // ==========================================
+      // News Slider (Carousel) Logic
+      // ==========================================
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initNewsSlider);
+      } else {
+        initNewsSlider();
       }
+
+      function initNewsSlider() {
+        var track = document.getElementById("newsTrack");
+        var prevBtn = document.getElementById("newsPrevBtn");
+        var nextBtn = document.getElementById("newsNextBtn");
+        var pagination = document.getElementById("newsPagination");
+        if (!track || !prevBtn || !nextBtn) return;
+
+        var cards = track.querySelectorAll(".news-card");
+        var totalCards = cards.length;
+        var currentIndex = 0;
+
+        function getVisibleCards() {
+          if (window.innerWidth <= 640) return 1;
+          if (window.innerWidth <= 992) return 2;
+          return 3;
+        }
+
+        function getMaxIndex() {
+          var visible = getVisibleCards();
+          return Math.max(0, totalCards - visible);
+        }
+
+        function createPagination() {
+          if (!pagination) return;
+          pagination.innerHTML = "";
+          var maxIdx = getMaxIndex();
+          var pages = maxIdx + 1;
+          for (var i = 0; i < pages; i++) {
+            var dot = document.createElement("span");
+            dot.className =
+              "news-slider-dot" + (i === currentIndex ? " active" : "");
+            dot.setAttribute("data-index", i);
+            dot.addEventListener("click", function () {
+              goToIndex(parseInt(this.getAttribute("data-index"), 10));
+            });
+            pagination.appendChild(dot);
+          }
+        }
+
+        function updateSlider() {
+          var maxIdx = getMaxIndex();
+          if (currentIndex > maxIdx) currentIndex = maxIdx;
+          if (currentIndex < 0) currentIndex = 0;
+
+          if (cards.length > 0) {
+            var firstCard = cards[0];
+            var cardWidth = firstCard.offsetWidth;
+            var gap = 24;
+            var shift = currentIndex * (cardWidth + gap);
+            track.style.transform = "translateX(-" + shift + "px)";
+          }
+
+          prevBtn.disabled = currentIndex === 0;
+          nextBtn.disabled = currentIndex >= maxIdx;
+
+          if (pagination) {
+            var dots = pagination.querySelectorAll(".news-slider-dot");
+            dots.forEach(function (dot, idx) {
+              dot.classList.toggle("active", idx === currentIndex);
+            });
+          }
+        }
+
+        function goToIndex(idx) {
+          currentIndex = idx;
+          updateSlider();
+        }
+
+        prevBtn.addEventListener("click", function () {
+          if (currentIndex > 0) {
+            currentIndex--;
+            updateSlider();
+          }
+        });
+
+        nextBtn.addEventListener("click", function () {
+          if (currentIndex < getMaxIndex()) {
+            currentIndex++;
+            updateSlider();
+          }
+        });
+
+        // Touch Swipe
+        var startX = 0;
+        var diffX = 0;
+        var isSwiping = false;
+
+        track.addEventListener(
+          "touchstart",
+          function (e) {
+            startX = e.touches[0].clientX;
+            diffX = 0;
+            isSwiping = true;
+          },
+          { passive: true },
+        );
+
+        track.addEventListener(
+          "touchmove",
+          function (e) {
+            if (!isSwiping) return;
+            diffX = e.touches[0].clientX - startX;
+          },
+          { passive: true },
+        );
+
+        track.addEventListener("touchend", function () {
+          if (!isSwiping) return;
+          isSwiping = false;
+          if (diffX < -45 && currentIndex < getMaxIndex()) {
+            currentIndex++;
+            updateSlider();
+          } else if (diffX > 45 && currentIndex > 0) {
+            currentIndex--;
+            updateSlider();
+          }
+        });
+
+        window.addEventListener("resize", function () {
+          createPagination();
+          updateSlider();
+        });
+
+        createPagination();
+        updateSlider();
+      }
+
+      // ==========================================
+      // News Modal Popup Logic
+      // ==========================================
+      function openNewsModal(card) {
+        var dateEl = card.querySelector(".news-date");
+        var titleEl = card.querySelector("h3");
+        var bodyEl = card.querySelector(".news-card-body");
+
+        if (!bodyEl) return;
+
+        document.getElementById("modalNewsDate").innerHTML = dateEl
+          ? dateEl.innerHTML
+          : "";
+        document.getElementById("modalNewsTitle").innerHTML = titleEl
+          ? titleEl.innerHTML
+          : "";
+        document.getElementById("modalNewsBody").innerHTML = bodyEl.innerHTML;
+
+        var modal = document.getElementById("newsModal");
+        if (modal) {
+          modal.classList.add("active");
+          modal.setAttribute("aria-hidden", "false");
+        }
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeNewsModal() {
+        var modal = document.getElementById("newsModal");
+        if (modal) {
+          modal.classList.remove("active");
+          modal.setAttribute("aria-hidden", "true");
+        }
+        document.body.style.overflow = "";
+      }
+
+      function handleModalBackdrop(e) {
+        if (
+          e.target &&
+          (e.target.classList.contains("news-modal-overlay") ||
+            e.target.classList.contains("news-modal"))
+        ) {
+          closeNewsModal();
+        }
+      }
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+          closeNewsModal();
+        }
+      });
     </script>
 </body>
 </html>

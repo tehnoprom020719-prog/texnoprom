@@ -167,24 +167,27 @@
       .logo-placeholder {
         width: 60px;
         height: 60px;
-        border-radius: 8px;
+        border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         overflow: hidden;
-        transition: all 0.3s;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         flex-shrink: 0;
-        padding: 5px;
+        padding: 0;
+        background: transparent;
       }
-      .logo-placeholder img {
+      .logo-placeholder img,
+      .logo-placeholder svg {
         width: 100%;
         height: 100%;
         border-radius: 50%;
-        object-fit: contain;
+        object-fit: cover;
+        display: block;
       }
       .logo-placeholder:hover {
-        transform: scale(1.05);
-        box-shadow: 0 5px 15px rgba(255, 107, 0, 0.3);
+        transform: scale(1.06);
+        box-shadow: 0 4px 16px rgba(255, 107, 0, 0.45);
       }
       .company-name h1 {
         font-size: 24px;
